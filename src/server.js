@@ -5,6 +5,13 @@ import apiRouter from './routes/index.js';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import swaggerUi from 'swagger-ui-express';
+import * as fs from 'node:fs';
+import path from 'node:path';
+
+const SWAGGER_DOCUMENT = JSON.parse(
+  fs.readFileSync(path.join('docs', 'swagger.json')),
+);
 
 const PORT = Number(getEnvVar('PORT', '3000'));
 
@@ -13,6 +20,7 @@ export const startServer = () => {
 
   app.use(express.json());
   app.use(cors());
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(SWAGGER_DOCUMENT));
 
   app.use(
     pino({
@@ -21,12 +29,6 @@ export const startServer = () => {
       },
     }),
   );
-
-  app.get('/', (req, res) => {
-    res.json({
-      message: 'Hello World!',
-    });
-  });
 
   app.use(apiRouter);
 
