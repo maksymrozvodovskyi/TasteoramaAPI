@@ -13,6 +13,7 @@ tags:
     description: Auth operations.
 servers:
   - url: http://127.0.0.1:3000
+  - url: https://tasteoramaapi.onrender.com
 
 components:
   securitySchemes:
