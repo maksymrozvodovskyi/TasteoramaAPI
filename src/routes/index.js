@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import categoriesRouter from './categories.js';
+import categoriesRouter from './categoriesRouter.js';
 
 const router = Router();
 
-router.use(categoriesRouter);
+router.use('/api/categories', categoriesRouter);
 
 export default router;
