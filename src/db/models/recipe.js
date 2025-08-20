@@ -5,7 +5,6 @@ const recipesSchema = new Schema(
     title: {
       type: String,
       required: true,
-      trim: true,
     },
     category: {
       type: Schema.Types.ObjectId,
@@ -19,7 +18,6 @@ const recipesSchema = new Schema(
     },
     area: {
       type: String,
-      trim: true,
     },
     instructions: {
       type: String,
@@ -27,7 +25,6 @@ const recipesSchema = new Schema(
     },
     description: {
       type: String,
-      trim: true,
     },
     thumb: {
       type: String,

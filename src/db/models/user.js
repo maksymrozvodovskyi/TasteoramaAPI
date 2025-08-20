@@ -5,7 +5,6 @@ const usersSchema = new Schema(
     name: {
       type: String,
       required: true,
-      trim: true,
     },
     avatar: {
       type: String,
@@ -13,11 +12,15 @@ const usersSchema = new Schema(
     },
     email: {
       type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
     },
+    favouriteRecipes: [
+      {
+        id: {
+          type: Schema.Types.ObjectId,
+          ref: 'recipes',
+        },
+      },
+    ],
   },
   {
     timestamps: true,
