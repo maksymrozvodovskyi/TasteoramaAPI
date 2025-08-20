@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors';
-import { getRecipeById } from '../services/recipes';
+import { getRecipeById } from '../services/recipes.js';
 
 export const getRecipeByIdController = async (req, res, next) => {
     const { id } = req.params;
@@ -11,7 +11,7 @@ export const getRecipeByIdController = async (req, res, next) => {
 
     res.status(200).json({
         status: 200,
-        message: 'Successfully found recipe!',
+        message: `Successfully found recipe with id ${id}!`,
         data: recipe,
-    })
-}
+    });
+};
