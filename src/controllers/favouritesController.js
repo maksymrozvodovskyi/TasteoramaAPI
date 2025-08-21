@@ -14,13 +14,15 @@ export const addToFavorites = async (req, res) => {
   );
 
   if (alreadyInFavorites) {
-    return res.status(400).json({ message: 'Already in favorites' });
+    return res.status(409).json({ message: 'Already in favorites' });
   }
 
   user.favouriteRecipes.push(recipe._id);
   await user.save();
 
-  res.status(200).json({
+  await user.populate('favouriteRcipes');
+
+  res.status(201).json({
     message: 'Recipe added to favorites',
     favorites: user.favouriteRecipes,
   });
