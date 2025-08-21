@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "eslint.config.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js",
@@ -30,12 +31,16 @@
     "pino-pretty": "^13.1.1"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "http-errors": "^2.0.0",
     "joi": "^18.0.1",
     "mongoose": "^8.17.2",
-    "pino-http": "^10.5.0"
+    "pino-http": "^10.5.0",
+    "swagger-ui-express": "^5.0.1"
   }
 }
