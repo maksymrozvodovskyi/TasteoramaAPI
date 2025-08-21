@@ -12,6 +12,9 @@ const usersSchema = new Schema(
     },
     email: {
       type: String,
+      required: true,
+      unique: true,
+      match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email address'],
     },
     favouriteRecipes: [
       {
@@ -28,4 +31,10 @@ const usersSchema = new Schema(
   },
 );
 
-export const UsersCollection = model('users', usersSchema);
+usersSchema.methods.toJSON = function () {
+  const obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
+
+export const UsersCollection = model('Users', usersSchema);
