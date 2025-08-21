@@ -1,12 +1,13 @@
 {
   "name": "tasteoramaapi",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "eslint.config.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
     "build": "npm run build-docs",
     "build-docs": "redocly bundle docs/openapi.yaml --ext json -o docs/swagger.json",
     "preview-docs": "redocly preview-docs"
@@ -44,6 +45,7 @@
     "mongoose": "^8.17.2",
     "multer": "^2.0.2",
     "pino-http": "^10.5.0",
+    "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   }
 }
