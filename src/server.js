@@ -1,4 +1,5 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import pino from 'pino-http';
 import cors from 'cors';
 import apiRouter from './routes/index.js';
@@ -20,6 +21,7 @@ export const startServer = () => {
 
   app.use(express.json());
   app.use(cors());
+  app.use(cookieParser());
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(SWAGGER_DOCUMENT));
 
   app.use(

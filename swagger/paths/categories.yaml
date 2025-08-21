@@ -1,0 +1,32 @@
+tags:
+  - Categories
+summary: Get list of categories
+operationId: getCategories
+description: 'Get list of food categories with this endpoint'
+security: []
+responses:
+  '200':
+    description: Successfully found categories!
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully found categories!
+            data:
+              type: array
+              items:
+                $ref: '../components/schemas/category.yaml'
+  '400':
+    $ref: '../components/responses/400.yaml'
+  '500':
+    $ref: '../components/responses/internalServerError.yaml'

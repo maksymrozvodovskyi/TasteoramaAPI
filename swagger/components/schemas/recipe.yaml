@@ -38,8 +38,8 @@ properties:
     format: binary
     example: https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg
   time:
-    type: integer
-    example: 60
+    type: string
+    example: '60'
   ingredients:
     type: array
     items:
