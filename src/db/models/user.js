@@ -14,6 +14,10 @@ const usersSchema = new Schema(
       type: String,
       match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email address'],
     },
+    password: {
+      type: String,
+      required: true,
+    },
     favouriteRecipes: [
       {
         type: Schema.Types.ObjectId,
