@@ -66,28 +66,54 @@
             }
           },
           "500": {
-            "description": "Internal server error",
+            "$ref": "#/components/responses/internalServerError"
+          }
+        }
+      }
+    },
+    "/api/ingredients": {
+      "get": {
+        "tags": [
+          "Ingredients"
+        ],
+        "summary": "Get list of ingredients",
+        "operationId": "getIngredients",
+        "description": "Get list of food ingredients with this endpoint",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Successfully found ingredients!",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "required": [
                     "status",
-                    "message"
+                    "message",
+                    "data"
                   ],
                   "properties": {
                     "status": {
                       "type": "integer",
-                      "example": 500
+                      "example": 200
                     },
                     "message": {
                       "type": "string",
-                      "example": "Internal server error"
+                      "example": "Successfully found ingredients!"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ingredient"
+                      }
                     }
                   }
                 }
               }
             }
+          },
+          "500": {
+            "$ref": "#/components/responses/internalServerError"
           }
         }
       }
@@ -117,6 +143,63 @@
             "description": "Category's name",
             "type": "string",
             "example": "Italian"
+          }
+        }
+      },
+      "ingredient": {
+        "type": "object",
+        "required": [
+          "_id",
+          "name",
+          "desc",
+          "img"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Ingredient's id",
+            "type": "string",
+            "example": "65ca67e7ae7f10c88b598384"
+          },
+          "name": {
+            "description": "Ingredient's name",
+            "type": "string",
+            "example": "Tomato"
+          },
+          "desc": {
+            "description": "Ingredient's description",
+            "type": "string",
+            "example": "Fresh red tomato"
+          },
+          "img": {
+            "description": "Ingredient's image URL",
+            "type": "string",
+            "example": "https://example.com/images/tomato.png"
+          }
+        }
+      }
+    },
+    "responses": {
+      "internalServerError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              }
+            }
           }
         }
       }
