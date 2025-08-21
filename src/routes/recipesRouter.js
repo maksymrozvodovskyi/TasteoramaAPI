@@ -1,22 +1,20 @@
 import { Router } from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
-// import { authenticate } from '../middlewares/authenticate.js';
-import { isValidId } from '../middlewares/isValidId.js';
+import { authenticate } from '../middlewares/authenticate.js';
 import {
-  getRecipeByIdController,
   getOwnRecipesController,
   createOwnRecipeController,
 } from '../controllers/recipes.js';
 
 const router = Router();
 
-// Ihor Yarema публічний ендпоінт для отримання детальної інформації про рецепт за його id
-router.get('/:recipeId', isValidId, ctrlWrapper(getRecipeByIdController));
+// всі маршрути тільки для авторизованого користувача
+router.use(authenticate);
 
-// Ihor Yarema приватні ендпоінти для отримання
-// router.use(authenticate);
-
+// GET /api/recipes/own → отримання власних рецептів
 router.get('/own', ctrlWrapper(getOwnRecipesController));
+
+// POST /api/recipes/own → створення з прив’язкою до owner
 router.post('/own', ctrlWrapper(createOwnRecipeController));
 
 export default router;
