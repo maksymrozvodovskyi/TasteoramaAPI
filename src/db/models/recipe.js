@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 
 const recipesSchema = new Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
     },
