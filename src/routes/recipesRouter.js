@@ -4,13 +4,13 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { authenticate } from '../middlewares/authenticate.js';
 import { validateId } from '../middlewares/validateID.js';
 
-const recipesRouter = Router();
+const router = Router();
 
-recipesRouter.delete(
+router.delete(
   '/favorites/:recipeId',
   authenticate,
   validateId,
   ctrlWrapper(deleteFavoriteRecipeController),
 );
 
-export default recipesRouter;
+export default router;
