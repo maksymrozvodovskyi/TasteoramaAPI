@@ -1,5 +1,5 @@
-import createHttpError from "http-errors";
-import { deleteFavoriteRecipe } from "../services/recipesServices.js";
+import createHttpError from 'http-errors';
+import { deleteFavoriteRecipe } from '../services/recipesServices.js';
 
 export async function deleteFavoriteRecipeController(req, res, next) {
   const userId = req.user._id;
