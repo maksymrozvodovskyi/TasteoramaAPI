@@ -20,7 +20,11 @@ paths:
       $ref: '../swagger/paths/auth/logout/post.yaml'
   /api/categories:
     get:
-      $ref: '../swagger/paths/categories/categories.yaml'
+      $ref: '../swagger/paths/categories.yaml'
+  /api/ingredients:
+    get:
+      $ref: '../swagger/paths/ingredients.yaml'
+
 components:
   securitySchemes:
     bearerAuth:

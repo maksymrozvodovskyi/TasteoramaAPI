@@ -3,8 +3,7 @@ tags:
 summary: Get list of categories
 operationId: getCategories
 description: 'Get list of food categories with this endpoint'
-security:
-  - bearerAuth: []
+security: []
 responses:
   '200':
     description: Successfully found categories!
@@ -26,20 +25,6 @@ responses:
             data:
               type: array
               items:
-                $ref: '../../components/schemas/category.yaml'
+                $ref: '../components/schemas/category.yaml'
   '500':
-    description: Internal server error
-    content:
-      application/json:
-        schema:
-          type: object
-          required:
-            - status
-            - message
-          properties:
-            status:
-              type: integer
-              example: 500
-            message:
-              type: string
-              example: Internal server error
+    $ref: '../components/responses/internalServerError.yaml'

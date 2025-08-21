@@ -1,0 +1,23 @@
+type: object
+required:
+  - _id
+  - name
+  - desc
+  - img
+properties:
+  _id:
+    description: Ingredient's id
+    type: string
+    example: 65ca67e7ae7f10c88b598384
+  name:
+    description: Ingredient's name
+    type: string
+    example: Tomato
+  desc:
+    description: Ingredient's description
+    type: string
+    example: Fresh red tomato
+  img:
+    description: Ingredient's image URL
+    type: string
+    example: https://example.com/images/tomato.png
