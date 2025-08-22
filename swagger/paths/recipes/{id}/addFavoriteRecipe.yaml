@@ -20,9 +20,5 @@ responses:
       application/json:
         schema:
           $ref: '../../../components/schemas/addFavoriteRecipe.yaml'
-  '400':
-    description: Bad Request
-  '401':
-    description: Unauthorized
-  '404':
-    description: Recipe not found
+  '409':
+    $ref: '../../../components/responses/409.yaml'
