@@ -3,6 +3,9 @@ import { deleteFavoriteRecipe } from '../services/recipesServices.js';
 
 export async function deleteFavoriteRecipeController(req, res, next) {
   try {
+    console.log(req.user._id);
+    console.log(req.params.recipeId);
+
     const userId = req.user._id;
     const { recipeId } = req.params;
 

@@ -16,6 +16,5 @@ export async function deleteFavoriteRecipe(userId, recipeId) {
     { new: true },
   );
 
-
   return updatedUser;
 }
