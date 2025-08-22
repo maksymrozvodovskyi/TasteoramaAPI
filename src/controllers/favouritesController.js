@@ -9,7 +9,7 @@ export const addToFavorites = async (req, res) => {
     return res.status(404).json({ message: 'Recipe not found' });
   }
 
-  const alreadyInFavorites = user.favouriteRecipes.some(
+  const alreadyInFavorites = user.favoritesRecipes.some(
     (id) => id.toString() === recipeId,
   );
 
@@ -17,13 +17,13 @@ export const addToFavorites = async (req, res) => {
     return res.status(409).json({ message: 'Already in favorites' });
   }
 
-  user.favouriteRecipes.push(recipe._id);
+  user.favoritesRecipes.push(recipe._id);
   await user.save();
 
   await user.populate('favoritesRecipes');
 
   res.status(201).json({
     message: 'Recipe added to favorites',
-    favoritesRecipes: user.favouriteRecipes,
+    favoritesRecipes: user.favoritesRecipes,
   });
 };
