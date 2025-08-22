@@ -7,12 +7,22 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   description: This is a documentation of Tasteoramaapi
 tags:
+  - name: Auth
+    description: Registration and login
   - name: Categories
     description: This is operations about categories
+  - name: Recipes
+    description: This is operations about recipes
 servers:
   - url: http://127.0.0.1:3000
   - url: https://tasteoramaapi.onrender.com
 paths:
+  /auth/register:
+    post:
+      $ref: '../swagger/paths/auth/register.yaml'
+  /auth/logout:
+    post:
+      $ref: '../swagger/paths/auth/logout/post.yaml'
   /api/categories:
     get:
       $ref: '../swagger/paths/categories.yaml'
@@ -22,7 +32,18 @@ paths:
   /api/recipes/favorites/{id}:
     delete:
       $ref: '../swagger/paths/recipes/favorites/{id}/delete.yaml'
-
+  /api/recipes/{id}/addFavoriteRecipe:
+    post:
+      $ref: '../swagger/paths/recipes/{id}/addFavoriteRecipe.yaml'
+  /api/users:
+    get:
+      $ref: '../swagger/paths/users.yaml'
+  /api/recipes:
+    post:
+      $ref: '../swagger/paths/recipes/post.yaml'
+  /api/recipes/{id}:
+    get:
+      $ref: '../swagger/paths/recipes/{id}/get.yaml'
 components:
   securitySchemes:
     bearerAuth:
