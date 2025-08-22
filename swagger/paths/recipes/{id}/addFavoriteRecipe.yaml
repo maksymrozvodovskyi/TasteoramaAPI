@@ -1,7 +1,7 @@
 tags:
-  - Favorites
-summary: Add recipe to favorites
-description: Added to favorites recipes
+  - Favorite recipes
+summary: Add a recipe to user's favorites
+description: Allows an authenticated user to add a specific recipe to their list of favorite recipes.
 operationId: addFavoriteRecipe
 security:
   - bearerAuth: []
@@ -9,13 +9,13 @@ parameters:
   - name: id
     in: path
     required: true
-    description: Recipe ID
+    description: Unique identifier of the recipe to be added to favorites
     schema:
       type: string
       example: 66c5d22f8b1f2d5ad93f2e11
 responses:
   '201':
-    description: Recipe successfully added to favorites
+    description: The recipe was successfully added to the user's favorites
     content:
       application/json:
         schema:
