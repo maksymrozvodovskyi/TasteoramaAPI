@@ -9,7 +9,13 @@ import { parseFormDataJson } from '../middlewares/parseFormDataJson.js';
 import { deleteFavoriteRecipeController } from '../controllers/recipesController.js';
 import { validateId } from '../middlewares/validateID.js';
 import { addToFavorites } from '../controllers/favouritesController.js';
+import { getRecipeByIdController } from '../controllers/recipes.js';
+import { isValidId } from '../middlewares/isValidId.js';
+
 const router = Router();
+
+router.get('/:id', isValidId, ctrlWrapper(getRecipeByIdController));
+
 router.delete(
   '/favorites/:recipeId',
   authenticate,
@@ -18,4 +24,5 @@ router.delete(
 );
 
 router.post('/', upload.single('thumb'), parseFormDataJson, validateBody(createRecipeSchema), authenticate, ctrlWrapper(createNewRecipeController));
+
 export default router;

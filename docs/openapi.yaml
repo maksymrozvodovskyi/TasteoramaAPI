@@ -24,6 +24,9 @@ paths:
   /api/recipes:
     post:
       $ref: '../swagger/paths/recipes/post.yaml'
+  /api/recipes/{id}:
+    get:
+      $ref: '../swagger/paths/recipes/{id}/get.yaml'
 
 components:
   securitySchemes:

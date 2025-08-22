@@ -5,44 +5,50 @@ required:
   - category
   - owner
   - instructions
-  - time
   - description
+  - time
   - ingredients
 properties:
   _id:
-    description: "Recipe's id"
     type: string
-    example: 65e4decdd286b30065d54af9
+    description: Unique identifier of the recipe
+    example: 6462a8f74c3d0ddd28897fcd
   title:
-    description: "Recipe's title"
     type: string
-    example: 'John Cake'
+    description: Recipe's title
+    example: Battenberg Cake
   category:
-    description: "Recipe's category"
     type: string
-    example: 'dessert'
+    description: Recipe's category
+    example: Dessert
   owner:
-    description: "Recipe's owner"
     type: string
-    example: 65e4decdd286b30065d54af9
+    description: ID of the user who created the recipe
+    example: 64c8d958249fae54bae90bb9
+  area:
+    type: string
+    description: Recipe's area or origin
+    example: British
   instructions:
-    description: "Recipe's instructions"
     type: string
-    example: Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment...
+    description: Recipe's instructions
+    example: Heat oven to 180C/160C fan/gas 4 and line the base...
   description:
-    description: "Recipe's description"
     type: string
-    example: A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.
-  time:
-    description: "Recipe's cooking time"
-    type: string
-    example: 120
+    description: Recipe's description
+    example: A classic British cake made with almond sponge cake...
   thumb:
-    description: "Recipe's photo"
     type: string
-    example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
+    format: binary
+    description: Recipe's photo
+    example: https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg
+  time:
+    type: string
+    description: Recipe's cooking time in minutes
+    example: '60'
   ingredients:
     type: array
+    description: List of ingredients with measurements
     items:
       type: object
       required:
@@ -51,7 +57,17 @@ properties:
       properties:
         id:
           type: string
-          example: '640c2dd963a319ea671e367e'
+          description: Ingredient ID
+          example: 640c2dd963a319ea671e367e
         measure:
           type: string
-          example: '175g'
+          description: Amount of ingredient
+          example: 175g
+  createdAt:
+    type: string
+    format: date-time
+    example: '2023-03-11T10:25:33.243Z'
+  updatedAt:
+    type: string
+    format: date-time
+    example: '2024-03-03T16:47:51.976Z'
