@@ -1,4 +1,34 @@
 import { UsersCollection } from '../db/models/user.js';
+import { RecipesCollection } from '../db/models/recipe.js';
+
+// Отримати всі улюблені рецепти користувача
+export const getFavoriteRecipes = async (userId) => {
+  const user = await UsersCollection.findById(userId).populate(
+    'favoritesRecipes',
+  );
+  if (!user) return [];
+  return user.favoritesRecipes;
+};
+
+// Отримання власних рецептів
+export const getOwnRecipes = async (userId) => {
+  return RecipesCollection.find({ owner: userId }).populate(
+    'ingredients.id',
+    'title',
+  );
+};
+
+// Створення з прив’язкою до owner
+export const createOwnRecipe = async (payload, userId) => {
+  return RecipesCollection.create({
+    ...payload,
+    owner: userId,
+  });
+};
+
+export const getRecipeById = async (recipeId) => {
+  return RecipesCollection.findOne({ _id: recipeId });
+};
 
 export async function deleteFavoriteRecipe(userId, recipeId) {
   const user = await UsersCollection.findById(userId);

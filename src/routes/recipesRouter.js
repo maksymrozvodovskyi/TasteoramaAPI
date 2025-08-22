@@ -8,7 +8,10 @@ import { createNewRecipeController } from '../controllers/createNewRecipeControl
 import { parseFormDataJson } from '../middlewares/parseFormDataJson.js';
 import { deleteFavoriteRecipeController } from '../controllers/recipesController.js';
 import { validateId } from '../middlewares/validateID.js';
-import { addToFavorites } from '../controllers/favouritesController.js';
+import {
+  addToFavorites,
+  getFavoriteRecipesController,
+} from '../controllers/favouritesController.js';
 import {
   getRecipeByIdController,
   createOwnRecipeController,
@@ -26,6 +29,9 @@ router.get('/own', ctrlWrapper(getOwnRecipesController));
 
 // POST /api/recipes/own → створення з прив’язкою до owner
 router.post('/own', ctrlWrapper(createOwnRecipeController));
+
+// GET /api/recipes/favorite → отримання улюблених рецептів
+router.get('/favorite', ctrlWrapper(getFavoriteRecipesController));
 
 router.get('/:id', isValidId, ctrlWrapper(getRecipeByIdController));
 

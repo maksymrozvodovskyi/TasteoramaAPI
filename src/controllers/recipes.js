@@ -3,7 +3,7 @@ import {
   getRecipeById,
   getOwnRecipes,
   createOwnRecipe,
-} from '../services/recipes.js';
+} from '../services/recipesServices.js';
 
 // Отримання власних рецептів
 export const getOwnRecipesController = async (req, res) => {
