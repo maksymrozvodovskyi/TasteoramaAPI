@@ -13,7 +13,7 @@ content:
           example: 401
         message:
           type: string
-          example: 'UnauthorizedError'
+          example: UnauthorizedError
         data:
           type: object
           required:
@@ -22,3 +22,4 @@ content:
             message:
               type: string
               example: 'Session not found'
+
