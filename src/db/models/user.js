@@ -14,7 +14,7 @@ const usersSchema = new Schema(
       type: String,
       match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email address'],
     },
-    favouriteRecipes: [
+    favoritesRecipes: [
       {
         type: Schema.Types.ObjectId,
         ref: 'recipes',
