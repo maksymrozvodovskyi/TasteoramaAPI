@@ -1,4 +1,4 @@
-description: Email is already in use
+description: Unauthorized
 content:
   application/json:
     schema:
@@ -10,10 +10,10 @@ content:
       properties:
         status:
           type: integer
-          example: 409
+          example: 401
         message:
           type: string
-          example: ConflictError
+          example: 'UnauthorizedError'
         data:
           type: object
           required:
@@ -21,4 +21,4 @@ content:
           properties:
             message:
               type: string
-              example: 'Email in use'
+              example: 'Session not found'

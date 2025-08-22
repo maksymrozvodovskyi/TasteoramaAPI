@@ -1,4 +1,4 @@
-description: Email is already in use
+description: Internal server error
 content:
   application/json:
     schema:
@@ -6,14 +6,13 @@ content:
       required:
         - status
         - message
-        - data
       properties:
         status:
           type: integer
-          example: 409
+          example: 500
         message:
           type: string
-          example: ConflictError
+          example: Internal server error
         data:
           type: object
           required:
@@ -21,4 +20,4 @@ content:
           properties:
             message:
               type: string
-              example: 'Email in use'
+              example: 'Something went wrong!'
