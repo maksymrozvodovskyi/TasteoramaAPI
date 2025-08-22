@@ -4,7 +4,7 @@ export async function deleteFavoriteRecipe(userId, recipeId) {
   const user = await UsersCollection.findById(userId);
   if (!user) return null;
 
-  const current = user.favouriteRecipes || [];
+  const current = user.favoritesRecipes || [];
   const updatedFavorites = current.filter((id) => id.toString() !== recipeId);
 
   const isChanged = updatedFavorites.length !== current.length;
@@ -12,7 +12,7 @@ export async function deleteFavoriteRecipe(userId, recipeId) {
 
   const updatedUser = await UsersCollection.findByIdAndUpdate(
     userId,
-    { favouriteRecipes: updatedFavorites },
+    { favoritesRecipes: updatedFavorites },
     { new: true },
   );
 
