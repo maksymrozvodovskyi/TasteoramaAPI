@@ -1,4 +1,4 @@
-description: Bad Request
+description: Email is already in use
 content:
   application/json:
     schema:
@@ -10,10 +10,10 @@ content:
       properties:
         status:
           type: integer
-          example: 400
+          example: 409
         message:
           type: string
-          example: Bad Request
+          example: ConflictError
         data:
           type: object
           required:
@@ -21,4 +21,4 @@ content:
           properties:
             message:
               type: string
-              example: "Bad Request"
+              example: 'Email in use'

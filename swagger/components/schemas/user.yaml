@@ -5,6 +5,9 @@ required:
   - _id
   - name
   - email
+  - favouriteRecipes
+  - createdAt
+  - updatedAt
 properties:
   _id:
     type: string
@@ -15,16 +18,17 @@ properties:
     type: string
     description: User's full name
     example: 'John Doe'
-  avatar:
-    type: string
-    description: User's avatar URL
-    format: uri
-    example: 'https://example.com/avatar.jpg'
   email:
     type: string
     format: email
     description: User's unique email address used for authentication and notifications
     example: 'john.doe@example.com'
+  avatar:
+    type: string
+    nullable: true
+    description: User's avatar URL or null
+    format: uri
+    example: 'https://example.com/avatars/user123.jpg'
   favouriteRecipes:
     type: array
     description: Collection of recipe IDs that the user has marked as favorites
@@ -32,6 +36,7 @@ properties:
       type: string
       pattern: '^[0-9a-fA-F]{24}$'
       description: MongoDB ObjectId reference to a recipe document
+      example: '6462a8f74c3d0ddd28898069'
     example: ['507f1f77bcf86cd799439012', '507f1f77bcf86cd799439013']
     default: []
   createdAt:
@@ -42,13 +47,14 @@ properties:
   updatedAt:
     type: string
     format: date-time
+    description: User update timestamp
     readOnly: true
     example: '2024-01-15T10:30:00.000Z'
 example:
   _id: '507f1f77bcf86cd799439011'
   name: 'John Doe'
-  avatar: 'https://example.com/avatars/user123.jpg'
   email: 'john.doe@example.com'
+  avatar: 'https://example.com/avatars/user123.jpg'
   favouriteRecipes: ['507f1f77bcf86cd799439012', '507f1f77bcf86cd799439013']
   createdAt: '2024-01-15T10:30:00.000Z'
   updatedAt: '2024-01-15T10:30:00.000Z'

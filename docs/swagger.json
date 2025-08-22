@@ -10,276 +10,33 @@
     "description": "This is a documentation of Tasteoramaapi"
   },
   "servers": [
-    {
-      "url": "http://127.0.0.1:3000"
-    },
-    {
-      "url": "https://tasteoramaapi.onrender.com"
-    }
+    { "url": "http://127.0.0.1:3000" },
+    { "url": "https://tasteoramaapi.onrender.com" }
   ],
   "tags": [
-    {
-      "name": "Auth",
-      "description": "Registration and login"
-    },
-    {
-      "name": "Categories",
-      "description": "This is operations about categories"
-    },
-    {
-      "name": "Recipes",
-      "description": "This is operations about recipes"
-    }
+    { "name": "Auth", "description": "Registration and login" },
+    { "name": "Categories", "description": "Operations about categories" },
+    { "name": "Recipes", "description": "Operations about recipes" },
+    { "name": "Users", "description": "Operations about users" }
   ],
   "paths": {
-    "/auth/logout": {
+    "/auth/register": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Logout User",
-        "operationId": "logoutUser",
-        "description": "Logout a user",
+        "tags": ["Auth"],
+        "summary": "Register",
+        "operationId": "register",
+        "description": "Register a new user",
         "security": [],
-        "responses": {
-          "204": {
-            "description": "Successfully logged out. No content returned."
-          },
-          "401": {
-            "description": "Unauthorized - no valid session found."
-          }
-        }
-      }
-    },
-    "/api/categories": {
-      "get": {
-        "tags": [
-          "Categories"
-        ],
-        "summary": "Get list of categories",
-        "operationId": "getCategories",
-        "description": "Get list of food categories with this endpoint",
-        "security": [],
-        "responses": {
-          "200": {
-            "description": "Successfully found categories!",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully found categories!"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/category"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "500": {
-            "$ref": "#/components/responses/internalServerError"
-          }
-        }
-      }
-    },
-    "/api/ingredients": {
-      "get": {
-        "tags": [
-          "Ingredients"
-        ],
-        "summary": "Get list of ingredients",
-        "operationId": "getIngredients",
-        "description": "Get list of food ingredients with this endpoint",
-        "security": [],
-        "responses": {
-          "200": {
-            "description": "Successfully found ingredients!",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully found ingredients!"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/ingredient"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "500": {
-            "$ref": "#/components/responses/internalServerError"
-          }
-        }
-      }
-    },
-    "/api/users": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Get current user",
-        "operationId": "getUser",
-        "description": "Get current authenticated user information",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully found user!",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully found user!"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/user"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
-          },
-          "500": {
-            "$ref": "#/components/responses/internalServerError"
-          }
-        }
-      }
-    },
-    "/api/recipes": {
-      "post": {
-        "tags": [
-          "Recipes"
-        ],
-        "summary": "Create recipe",
-        "operationId": "createRecipe",
-        "description": "Create a recipe with payload",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "title",
-                  "category",
-                  "instructions",
-                  "time",
-                  "description",
-                  "ingredients"
-                ],
+                "required": ["name", "email", "password"],
                 "properties": {
-                  "title": {
-                    "description": "Recipe's title",
-                    "type": "string",
-                    "example": "John Cake"
-                  },
-                  "category": {
-                    "description": "Recipe's category",
-                    "type": "string",
-                    "example": "dessert"
-                  },
-                  "instructions": {
-                    "description": "Recipe's instructions",
-                    "type": "string",
-                    "example": "Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment..."
-                  },
-                  "description": {
-                    "description": "Recipe's description",
-                    "type": "string",
-                    "example": "A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance."
-                  },
-                  "time": {
-                    "description": "Recipe's cooking time",
-                    "type": "string",
-                    "example": 120
-                  },
-                  "thumb": {
-                    "description": "Recipe's photo",
-                    "type": "string",
-                    "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
-                  },
-                  "ingredients": {
-                    "description": "Recipe's ingredients",
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "required": [
-                        "id",
-                        "measure"
-                      ],
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "example": "640c2dd963a319ea671e367e"
-                        },
-                        "measure": {
-                          "type": "string",
-                          "example": "175g"
-                        }
-                      }
-                    }
-                  }
+                  "name": { "type": "string", "example": "Eva" },
+                  "email": { "type": "string", "example": "eva@example.com" },
+                  "password": { "type": "string", "example": "1234qwerty" }
                 }
               }
             }
@@ -287,336 +44,193 @@
         },
         "responses": {
           "201": {
-            "description": "Creates a recipe",
+            "description": "User registered successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 201
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully created a recipe!"
-                    },
+                    "status": { "type": "integer", "example": 201 },
+                    "message": { "type": "string", "example": "User created successfully" },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/recipe"
+                      "properties": { "user": { "$ref": "#/components/schemas/user" } }
                     }
                   }
                 }
               }
             }
           },
-          "500": {
-            "$ref": "#/components/responses/internalServerError"
+          "400": { "$ref": "#/components/responses/400" },
+          "409": { "$ref": "#/components/responses/409" }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Logout",
+        "operationId": "logout",
+        "description": "Logout current user",
+        "security": [],
+        "responses": {
+          "204": { "description": "No content. Logged out successfully." },
+          "401": { "$ref": "#/components/responses/401" }
+        }
+      }
+    },
+    "/api/categories": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Get categories",
+        "responses": {
+          "200": {
+            "description": "Categories list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/category" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ingredients": {
+      "get": {
+        "tags": ["Recipes"],
+        "summary": "Get ingredients",
+        "responses": {
+          "200": {
+            "description": "Ingredients list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ingredient" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get current user",
+        "responses": {
+          "200": {
+            "description": "User profile",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/user" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/401" }
+        }
+      }
+    },
+    "/api/recipes": {
+      "get": {
+        "tags": ["Recipes"],
+        "summary": "Get all recipes",
+        "responses": {
+          "200": {
+            "description": "Recipes list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/recipe" }
+                }
+              }
+            }
           }
         }
       }
     },
     "/api/recipes/{id}": {
       "get": {
-        "tags": [
-          "Recipes"
-        ],
+        "tags": ["Recipes"],
         "summary": "Get recipe by id",
-        "operationId": "getRecipe",
-        "description": "Retrieve a single recipe by its unique identifier.",
-        "security": [],
         "parameters": [
           {
-            "in": "path",
             "name": "id",
+            "in": "path",
             "required": true,
-            "schema": {
-              "type": "string",
-              "example": "6462a8f74c3d0ddd28897fcd"
-            }
+            "schema": { "type": "string", "pattern": "^[0-9a-fA-F]{24}$" }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully found recipe with id",
+            "description": "Recipe object",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully get recipe with id"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/recipe"
-                    }
-                  }
-                }
+                "schema": { "$ref": "#/components/schemas/recipe" }
               }
             }
           },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
-          }
+          "404": { "$ref": "#/components/responses/404" }
         }
       }
     }
   },
   "components": {
     "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
-      }
+      "bearerAuth": { "type": "http", "scheme": "bearer" }
     },
     "schemas": {
+      "user": {
+        "type": "object",
+        "title": "User",
+        "required": ["_id", "name", "email", "favouriteRecipes", "createdAt", "updatedAt"],
+        "properties": {
+          "_id": { "type": "string", "pattern": "^[0-9a-fA-F]{24}$", "example": "507f1f77bcf86cd799439011" },
+          "name": { "type": "string", "example": "John Doe" },
+          "avatar": { "type": "string", "nullable": true, "format": "uri", "example": "https://example.com/avatar.jpg" },
+          "email": { "type": "string", "format": "email", "example": "john.doe@example.com" },
+          "favouriteRecipes": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[0-9a-fA-F]{24}$" },
+            "example": ["507f1f77bcf86cd799439012"],
+            "default": []
+          },
+          "createdAt": { "type": "string", "format": "date-time", "example": "2024-01-15T10:30:00Z" },
+          "updatedAt": { "type": "string", "format": "date-time", "example": "2024-01-15T10:30:00Z" }
+        }
+      },
       "category": {
         "type": "object",
-        "title": "Category",
-        "description": "Food category used to classify and organize recipes",
-        "required": [
-          "_id",
-          "name"
-        ],
         "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Category's unique identifier",
-            "pattern": "^[0-9a-fA-F]{24}$",
-            "example": "65ca67e7ae7f10c88b598384"
-          },
-          "name": {
-            "type": "string",
-            "description": "Category's name",
-            "example": "Italian"
-          }
-        },
-        "example": {
-          "_id": "65ca67e7ae7f10c88b598384",
-          "name": "Italian"
+          "_id": { "type": "string", "pattern": "^[0-9a-fA-F]{24}$" },
+          "name": { "type": "string", "example": "Dessert" }
         }
       },
       "ingredient": {
         "type": "object",
-        "title": "Ingredient",
-        "description": "Ingredient information used in recipes with details and visual representation",
-        "required": [
-          "_id",
-          "name",
-          "desc",
-          "img"
-        ],
         "properties": {
-          "_id": {
-            "description": "Ingredient's id",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{24}$",
-            "example": "65ca67e7ae7f10c88b598384"
-          },
-          "name": {
-            "type": "string",
-            "example": "Tomato"
-          },
-          "desc": {
-            "type": "string",
-            "example": "Fresh red tomato, perfect for salads and cooking"
-          },
-          "img": {
-            "type": "string",
-            "format": "uri",
-            "example": "https://example.com/images/tomato.png"
-          }
-        },
-        "example": {
-          "_id": "65ca67e7ae7f10c88b598384",
-          "name": "Tomato",
-          "desc": "Fresh red tomato, perfect for salads and cooking",
-          "img": "https://example.com/images/tomato.png"
-        }
-      },
-      "user": {
-        "type": "object",
-        "title": "User",
-        "description": "User account information with personal details and preferences",
-        "required": [
-          "_id",
-          "name",
-          "email"
-        ],
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "User unique identifier",
-            "pattern": "^[0-9a-fA-F]{24}$",
-            "example": "507f1f77bcf86cd799439011"
-          },
-          "name": {
-            "type": "string",
-            "description": "User's full name",
-            "example": "John Doe"
-          },
-          "avatar": {
-            "type": "string",
-            "description": "User's avatar URL",
-            "format": "uri",
-            "example": "https://example.com/avatar.jpg"
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "description": "User's unique email address used for authentication and notifications",
-            "example": "john.doe@example.com"
-          },
-          "favouriteRecipes": {
-            "type": "array",
-            "description": "Collection of recipe IDs that the user has marked as favorites",
-            "items": {
-              "type": "string",
-              "pattern": "^[0-9a-fA-F]{24}$",
-              "description": "MongoDB ObjectId reference to a recipe document"
-            },
-            "example": [
-              "507f1f77bcf86cd799439012",
-              "507f1f77bcf86cd799439013"
-            ],
-            "default": []
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "User creation timestamp",
-            "example": "2024-01-15T10:30:00Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true,
-            "example": "2024-01-15T10:30:00.000Z"
-          }
-        },
-        "example": {
-          "_id": "507f1f77bcf86cd799439011",
-          "name": "John Doe",
-          "avatar": "https://example.com/avatars/user123.jpg",
-          "email": "john.doe@example.com",
-          "favouriteRecipes": [
-            "507f1f77bcf86cd799439012",
-            "507f1f77bcf86cd799439013"
-          ],
-          "createdAt": "2024-01-15T10:30:00.000Z",
-          "updatedAt": "2024-01-15T10:30:00.000Z"
+          "_id": { "type": "string", "pattern": "^[0-9a-fA-F]{24}$" },
+          "name": { "type": "string", "example": "Sugar" },
+          "type": { "type": "string", "example": "Sweetener" }
         }
       },
       "recipe": {
         "type": "object",
-        "required": [
-          "_id",
-          "title",
-          "category",
-          "owner",
-          "instructions",
-          "description",
-          "time",
-          "ingredients"
-        ],
         "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Unique identifier of the recipe",
-            "example": "6462a8f74c3d0ddd28897fcd"
-          },
-          "title": {
-            "type": "string",
-            "description": "Recipe's title",
-            "example": "Battenberg Cake"
-          },
-          "category": {
-            "type": "string",
-            "description": "Recipe's category",
-            "example": "Dessert"
-          },
-          "owner": {
-            "type": "string",
-            "description": "ID of the user who created the recipe",
-            "example": "64c8d958249fae54bae90bb9"
-          },
-          "area": {
-            "type": "string",
-            "description": "Recipe's area or origin",
-            "example": "British"
-          },
-          "instructions": {
-            "type": "string",
-            "description": "Recipe's instructions",
-            "example": "Heat oven to 180C/160C fan/gas 4 and line the base..."
-          },
-          "description": {
-            "type": "string",
-            "description": "Recipe's description",
-            "example": "A classic British cake made with almond sponge cake..."
-          },
-          "thumb": {
-            "type": "string",
-            "format": "binary",
-            "description": "Recipe's photo",
-            "example": "https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg"
-          },
-          "time": {
-            "type": "string",
-            "description": "Recipe's cooking time in minutes",
-            "example": "60"
-          },
+          "_id": { "type": "string", "pattern": "^[0-9a-fA-F]{24}$" },
+          "title": { "type": "string", "example": "Chocolate Cake" },
+          "description": { "type": "string", "example": "Delicious cake" },
           "ingredients": {
             "type": "array",
-            "description": "List of ingredients with measurements",
-            "items": {
-              "type": "object",
-              "required": [
-                "id",
-                "measure"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "Ingredient ID",
-                  "example": "640c2dd963a319ea671e367e"
-                },
-                "measure": {
-                  "type": "string",
-                  "description": "Amount of ingredient",
-                  "example": "175g"
-                }
-              }
-            }
+            "items": { "$ref": "#/components/schemas/ingredient" }
           },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2023-03-11T10:25:33.243Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2024-03-03T16:47:51.976Z"
-          }
+          "category": { "$ref": "#/components/schemas/category" },
+          "owner": { "$ref": "#/components/schemas/user" }
         }
       }
     },
@@ -627,24 +241,13 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
               "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 400
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Bad Request"
-                },
+                "status": { "type": "integer", "example": 400 },
+                "message": { "type": "string", "example": "Bad Request" },
                 "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string", "example": "Invalid input data" }
                   }
                 }
               }
@@ -658,30 +261,13 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
               "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 401
-                },
-                "message": {
-                  "type": "string",
-                  "example": "UnauthorizedError"
-                },
+                "status": { "type": "integer", "example": 401 },
+                "message": { "type": "string", "example": "UnauthorizedError" },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
                   "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Session not found"
-                    }
+                    "message": { "type": "string", "example": "Session not found" }
                   }
                 }
               }
@@ -690,84 +276,42 @@
         }
       },
       "404": {
-        "description": "Resource not found",
+        "description": "Not Found",
         "content": {
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
               "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 404
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Resource not found"
-                }
+                "status": { "type": "integer", "example": 404 },
+                "message": { "type": "string", "example": "Not Found" }
+              }
+            }
+          }
+        }
+      },
+      "409": {
+        "description": "Conflict",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": { "type": "integer", "example": 409 },
+                "message": { "type": "string", "example": "Email already exists" }
               }
             }
           }
         }
       },
       "500": {
-        "description": "Internal server error",
+        "description": "Internal Server Error",
         "content": {
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
               "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 500
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Internal server error"
-                },
-                "data": {
-                  "type": "object",
-                  "required": [
-                    "message"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Something went wrong!"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "internalServerError": {
-        "description": "Internal server error",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 500
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Internal server error"
-                }
+                "status": { "type": "integer", "example": 500 },
+                "message": { "type": "string", "example": "Internal server error" }
               }
             }
           }

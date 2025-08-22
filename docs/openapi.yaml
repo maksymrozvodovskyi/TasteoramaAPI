@@ -17,6 +17,9 @@ servers:
   - url: http://127.0.0.1:3000
   - url: https://tasteoramaapi.onrender.com
 paths:
+  /auth/register:
+    post:
+      $ref: '../swagger/paths/auth/register.yaml'
   /auth/logout:
     post:
       $ref: '../swagger/paths/auth/logout/post.yaml'
@@ -35,7 +38,6 @@ paths:
   /api/recipes/{id}:
     get:
       $ref: '../swagger/paths/recipes/{id}/get.yaml'
-
 components:
   securitySchemes:
     bearerAuth:
