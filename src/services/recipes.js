@@ -14,3 +14,7 @@ export const createOwnRecipe = async (payload, userId) => {
     owner: userId,
   });
 };
+
+export const getRecipeById = async (recipeId) => {
+  return RecipesCollection.findOne({ _id: recipeId });
+};

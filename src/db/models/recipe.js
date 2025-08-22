@@ -7,7 +7,7 @@ const recipesSchema = new Schema(
       required: true,
     },
     category: {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: 'categories',
       required: true,
     },
@@ -25,10 +25,10 @@ const recipesSchema = new Schema(
     },
     description: {
       type: String,
+      required: true,
     },
     thumb: {
       type: String,
-      required: true,
     },
     time: {
       type: String,
