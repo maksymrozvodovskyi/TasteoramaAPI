@@ -7,10 +7,8 @@ export const createNewRecipeController = async (req, res, next) => {
     let photoUrl;
     if (photo) {
         photoUrl = await saveFileToCloudinary(photo);
-    }
-
-    const recipe = await createNewRecipe({...req.body, /*owner: req.user._id, */photo: photoUrl,});
-
+    };
+    const recipe = await createNewRecipe({...req.body, owner: req.user._id, thumb: photoUrl});
     res.status(201).json({
         status: 201,
         message: "Successfully created a recipe!",

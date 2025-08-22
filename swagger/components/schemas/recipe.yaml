@@ -1,0 +1,57 @@
+type: object
+required:
+  - _id
+  - title
+  - category
+  - owner
+  - instructions
+  - time
+  - description
+  - ingredients
+properties:
+  _id:
+    description: "Recipe's id"
+    type: string
+    example: 65e4decdd286b30065d54af9
+  title:
+    description: "Recipe's title"
+    type: string
+    example: 'John Cake'
+  category:
+    description: "Recipe's category"
+    type: string
+    example: 'dessert'
+  owner:
+    description: "Recipe's owner"
+    type: string
+    example: 65e4decdd286b30065d54af9
+  instructions:
+    description: "Recipe's instructions"
+    type: string
+    example: Heat oven to 180C/160C fan/gas 4 and line the base and sides of a 20cm square tin with baking parchment...
+  description:
+    description: "Recipe's description"
+    type: string
+    example: A classic British cake made with almond sponge cake and covered with marzipan. It is traditionally pink and yellow checkered in appearance.
+  time:
+    description: "Recipe's cooking time"
+    type: string
+    example: 120
+  thumb:
+    description: "Recipe's photo"
+    type: string
+    example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
+  ingredients:
+    type: array
+    items:
+      type: object
+      required:
+        - id
+        - measure
+      properties:
+        id:
+          type: string
+          example: '640c2dd963a319ea671e367e'
+        measure:
+          type: string
+          example: '175g'

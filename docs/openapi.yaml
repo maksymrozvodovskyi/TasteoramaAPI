@@ -9,6 +9,8 @@ info:
 tags:
   - name: Categories
     description: This is operations about categories
+  - name: Recipes
+    description: This is operations about recipes
 servers:
   - url: http://127.0.0.1:3000
   - url: https://tasteoramaapi.onrender.com
@@ -19,6 +21,9 @@ paths:
   /api/ingredients:
     get:
       $ref: '../swagger/paths/ingredients.yaml'
+  /api/recipes:
+    post:
+      $ref: '../swagger/paths/recipes/post.yaml'
 
 components:
   securitySchemes:
