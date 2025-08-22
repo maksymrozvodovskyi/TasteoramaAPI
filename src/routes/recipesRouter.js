@@ -11,8 +11,6 @@ const router = Router();
 
 router.get('/:id', isValidId, ctrlWrapper(getRecipeByIdController));
 
-router.get('/:id', isValidId, ctrlWrapper(getRecipeByIdController));
-
 router.delete(
   '/favorites/:recipeId',
   authenticate,
