@@ -17,6 +17,9 @@ servers:
   - url: http://127.0.0.1:3000
   - url: https://tasteoramaapi.onrender.com
 paths:
+  /auth/login:
+    post:
+      $ref: '../swagger/paths/auth/login/post.yaml'
   /auth/logout:
     post:
       $ref: '../swagger/paths/auth/logout/post.yaml'
