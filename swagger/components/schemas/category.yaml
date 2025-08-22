@@ -1,0 +1,13 @@
+type: object
+required:
+  - _id
+  - name
+properties:
+  _id:
+    description: Category's id
+    type: string
+    example: 65ca67e7ae7f10c88b598384
+  name:
+    description: Category's name
+    type: string
+    example: Italian
