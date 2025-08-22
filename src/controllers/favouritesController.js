@@ -20,7 +20,7 @@ export const addToFavorites = async (req, res) => {
   user.favouriteRecipes.push(recipe._id);
   await user.save();
 
-  await user.populate('favouriteRcipes');
+  await user.populate('favouriteRecipes');
 
   res.status(201).json({
     message: 'Recipe added to favorites',
