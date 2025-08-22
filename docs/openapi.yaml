@@ -16,6 +16,9 @@ paths:
   /api/categories:
     get:
       $ref: '../swagger/paths/categories/categories.yaml'
+  /api/recipes/favorites/{id}:
+    delete:
+      $ref: '../swagger/paths/recipes/favorites/{id}/delete.yaml'
 components:
   securitySchemes:
     bearerAuth:
