@@ -25,6 +25,7 @@ const recipesSchema = new Schema(
     },
     description: {
       type: String,
+      required: true,
     },
     thumb: {
       type: String,

@@ -1,7 +1,12 @@
 import { Router } from 'express';
-import { deleteFavoriteRecipeController } from '../controllers/recipesController.js';
-import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { authenticate } from '../middlewares/authenticate.js';
+import { ctrlWrapper } from "../utils/ctrlWrapper.js";
+import { validateBody } from "../middlewares/validateBody.js";
+import { upload } from '../middlewares/multer.js';
+import { createRecipeSchema } from '../validation/recipe.validation.js';
+import { createNewRecipeController } from '../controllers/createNewRecipeController.js';
+import { parseFormDataJson } from '../middlewares/parseFormDataJson.js';
+import { deleteFavoriteRecipeController } from '../controllers/recipesController.js';
 import { validateId } from '../middlewares/validateID.js';
 import { addToFavorites } from '../controllers/favouritesController.js';
 import { getRecipeByIdController } from '../controllers/recipes.js';
@@ -18,6 +23,6 @@ router.delete(
   ctrlWrapper(deleteFavoriteRecipeController),
 );
 
-router.post('/favorites/:recipeId', authenticate, addToFavorites);
+router.post('/', upload.single('thumb'), parseFormDataJson, validateBody(createRecipeSchema), authenticate, ctrlWrapper(createNewRecipeController));
 
 export default router;

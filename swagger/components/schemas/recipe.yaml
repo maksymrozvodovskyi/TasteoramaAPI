@@ -8,7 +8,6 @@ required:
   - description
   - time
   - ingredients
-
 properties:
   _id:
     type: string
@@ -16,9 +15,11 @@ properties:
     example: 6462a8f74c3d0ddd28897fcd
   title:
     type: string
+    description: Recipe's title
     example: Battenberg Cake
   category:
     type: string
+    description: Recipe's category
     example: Dessert
   owner:
     type: string
@@ -26,22 +27,28 @@ properties:
     example: 64c8d958249fae54bae90bb9
   area:
     type: string
+    description: Recipe's area or origin
     example: British
   instructions:
     type: string
-    example: 'Heat oven to 180C/160C fan/gas 4 and line the base...'
+    description: Recipe's instructions
+    example: Heat oven to 180C/160C fan/gas 4 and line the base...
   description:
     type: string
-    example: 'A classic British cake made with almond sponge cake...'
+    description: Recipe's description
+    example: A classic British cake made with almond sponge cake...
   thumb:
     type: string
     format: binary
+    description: Recipe's photo
     example: https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg
   time:
     type: string
+    description: Recipe's cooking time in minutes
     example: '60'
   ingredients:
     type: array
+    description: List of ingredients with measurements
     items:
       type: object
       required:
@@ -54,6 +61,7 @@ properties:
           example: 640c2dd963a319ea671e367e
         measure:
           type: string
+          description: Amount of ingredient
           example: 175g
   createdAt:
     type: string
