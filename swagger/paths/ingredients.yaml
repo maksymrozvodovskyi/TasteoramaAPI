@@ -26,5 +26,7 @@ responses:
               type: array
               items:
                 $ref: '../components/schemas/ingredient.yaml'
+  '400':
+    $ref: ../components/responses/400.yaml
   '500':
     $ref: '../components/responses/internalServerError.yaml'

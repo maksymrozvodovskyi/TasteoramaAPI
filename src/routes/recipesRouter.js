@@ -4,8 +4,12 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { authenticate } from '../middlewares/authenticate.js';
 import { validateId } from '../middlewares/validateID.js';
 import { addToFavorites } from '../controllers/favouritesController.js';
+import { getRecipeByIdController } from '../controllers/recipes.js';
+import { isValidId } from '../middlewares/isValidId.js';
 
 const router = Router();
+
+router.get('/:id', isValidId, ctrlWrapper(getRecipeByIdController));
 
 router.delete(
   '/favorites/:recipeId',

@@ -19,6 +19,9 @@ paths:
   /api/ingredients:
     get:
       $ref: '../swagger/paths/ingredients.yaml'
+  /api/recipes/{id}:
+    get:
+      $ref: '../swagger/paths/recipes/{id}/get.yaml'
 
 components:
   securitySchemes:
