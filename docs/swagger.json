@@ -14,9 +14,15 @@
     { "url": "https://tasteoramaapi.onrender.com" }
   ],
   "tags": [
-    { "name": "Categories", "description": "This is operations about categories" },
+    {
+      "name": "Categories",
+      "description": "This is operations about categories"
+    },
     { "name": "Recipes", "description": "This is operations about recipes" },
-    { "name": "Ingredients", "description": "This is operations about ingredients" }
+    {
+      "name": "Ingredients",
+      "description": "This is operations about ingredients"
+    }
   ],
   "paths": {
     "/api/categories": {
@@ -36,7 +42,10 @@
                   "required": ["status", "message", "data"],
                   "properties": {
                     "status": { "type": "integer", "example": 200 },
-                    "message": { "type": "string", "example": "Successfully found categories!" },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found categories!"
+                    },
                     "data": {
                       "type": "array",
                       "items": { "$ref": "#/components/schemas/category" }
@@ -68,7 +77,10 @@
                   "required": ["status", "message", "data"],
                   "properties": {
                     "status": { "type": "integer", "example": 200 },
-                    "message": { "type": "string", "example": "Successfully found ingredients!" },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found ingredients!"
+                    },
                     "data": {
                       "type": "array",
                       "items": { "$ref": "#/components/schemas/ingredient" }
@@ -95,21 +107,40 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": ["title", "category", "instructions", "time", "description", "ingredients"],
+                "required": [
+                  "title",
+                  "category",
+                  "instructions",
+                  "time",
+                  "description",
+                  "ingredients"
+                ],
                 "properties": {
                   "title": { "type": "string", "example": "John Cake" },
                   "category": { "type": "string", "example": "dessert" },
-                  "instructions": { "type": "string", "example": "Heat oven to 180C/160C fan..." },
-                  "description": { "type": "string", "example": "A classic British cake..." },
+                  "instructions": {
+                    "type": "string",
+                    "example": "Heat oven to 180C/160C fan..."
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "A classic British cake..."
+                  },
                   "time": { "type": "string", "example": "120" },
-                  "thumb": { "type": "string", "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png" },
+                  "thumb": {
+                    "type": "string",
+                    "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+                  },
                   "ingredients": {
                     "type": "array",
                     "items": {
                       "type": "object",
                       "required": ["id", "measure"],
                       "properties": {
-                        "id": { "type": "string", "example": "640c2dd963a319ea671e367e" },
+                        "id": {
+                          "type": "string",
+                          "example": "640c2dd963a319ea671e367e"
+                        },
                         "measure": { "type": "string", "example": "175g" }
                       }
                     }
@@ -129,7 +160,10 @@
                   "required": ["status", "message", "data"],
                   "properties": {
                     "status": { "type": "integer", "example": 201 },
-                    "message": { "type": "string", "example": "Successfully created a recipe!" },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully created a recipe!"
+                    },
                     "data": { "$ref": "#/components/schemas/recipe" }
                   }
                 }
@@ -149,7 +183,15 @@
         "description": "Retrieve a single recipe by its unique identifier.",
         "security": [],
         "parameters": [
-          { "in": "path", "name": "id", "required": true, "schema": { "type": "string", "example": "6462a8f74c3d0ddd28897fcd" } }
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "6462a8f74c3d0ddd28897fcd"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -161,7 +203,10 @@
                   "required": ["status", "message", "data"],
                   "properties": {
                     "status": { "type": "integer", "example": 200 },
-                    "message": { "type": "string", "example": "Successfully get recipe with id" },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully get recipe with id"
+                    },
                     "data": { "$ref": "#/components/schemas/recipe" }
                   }
                 }
@@ -192,21 +237,46 @@
           "_id": { "type": "string", "example": "65ca67e7ae7f10c88b598384" },
           "name": { "type": "string", "example": "Tomato" },
           "desc": { "type": "string", "example": "Fresh red tomato" },
-          "img": { "type": "string", "example": "https://example.com/images/tomato.png" }
+          "img": {
+            "type": "string",
+            "example": "https://example.com/images/tomato.png"
+          }
         }
       },
       "recipe": {
         "type": "object",
-        "required": ["_id", "title", "category", "owner", "instructions", "description", "time", "ingredients"],
+        "required": [
+          "_id",
+          "title",
+          "category",
+          "owner",
+          "instructions",
+          "description",
+          "time",
+          "ingredients"
+        ],
         "properties": {
-          "_id": { "type": "string", "description": "Unique identifier of the recipe", "example": "6462a8f74c3d0ddd28897fcd" },
+          "_id": {
+            "type": "string",
+            "description": "Unique identifier of the recipe",
+            "example": "6462a8f74c3d0ddd28897fcd"
+          },
           "title": { "type": "string", "example": "Battenberg Cake" },
           "category": { "type": "string", "example": "Dessert" },
           "owner": { "type": "string", "example": "64c8d958249fae54bae90bb9" },
           "area": { "type": "string", "example": "British" },
-          "instructions": { "type": "string", "example": "Heat oven to 180C/160C fan..." },
-          "description": { "type": "string", "example": "A classic British cake..." },
-          "thumb": { "type": "string", "example": "https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg" },
+          "instructions": {
+            "type": "string",
+            "example": "Heat oven to 180C/160C fan..."
+          },
+          "description": {
+            "type": "string",
+            "example": "A classic British cake..."
+          },
+          "thumb": {
+            "type": "string",
+            "example": "https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg"
+          },
           "time": { "type": "string", "example": "60" },
           "ingredients": {
             "type": "array",
@@ -214,13 +284,24 @@
               "type": "object",
               "required": ["id", "measure"],
               "properties": {
-                "id": { "type": "string", "example": "640c2dd963a319ea671e367e" },
+                "id": {
+                  "type": "string",
+                  "example": "640c2dd963a319ea671e367e"
+                },
                 "measure": { "type": "string", "example": "175g" }
               }
             }
           },
-          "createdAt": { "type": "string", "format": "date-time", "example": "2023-03-11T10:25:33.243Z" },
-          "updatedAt": { "type": "string", "format": "date-time", "example": "2024-03-03T16:47:51.976Z" }
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-03-11T10:25:33.243Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-03-03T16:47:51.976Z"
+          }
         }
       }
     },
@@ -265,7 +346,10 @@
               "required": ["status", "message"],
               "properties": {
                 "status": { "type": "integer", "example": 500 },
-                "message": { "type": "string", "example": "Internal server error" }
+                "message": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
               }
             }
           }
