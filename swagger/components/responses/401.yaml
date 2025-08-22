@@ -1,4 +1,4 @@
-description: Unauthorized error
+description: Unauthorized
 content:
   application/json:
     schema:
@@ -21,4 +21,5 @@ content:
           properties:
             message:
               type: string
-              example: 'Unauthorized'
+              example: 'Session not found'
+
