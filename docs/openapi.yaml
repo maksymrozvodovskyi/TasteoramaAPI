@@ -7,12 +7,17 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   description: This is a documentation of Tasteoramaapi
 tags:
+  - name: Auth
+    description: Auth operations.
   - name: Categories
     description: This is operations about categories
 servers:
   - url: http://127.0.0.1:3000
   - url: https://tasteoramaapi.onrender.com
 paths:
+  /auth/register:
+    post:
+      $ref: '../swagger/paths/auth/register.yaml'
   /api/categories:
     get:
       $ref: '../swagger/paths/categories.yaml'
