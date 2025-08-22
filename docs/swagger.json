@@ -234,13 +234,75 @@
         }
       }
     },
+    "/api/recipes/favorites/{id}": {
+      "delete": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Remove recipe from favorites",
+        "operationId": "deleteFavoriteRecipe",
+        "description": "Remove a recipe from the user's list of favorite recipes by ID",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "6462a8f74c3d0ddd28897fcd"
+            },
+            "description": "ID of the recipe to remove from favorites"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed recipe from favorites",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Recipe removed from favorites"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/internalServerError"
+          }
+        }
+      }
+    },
     "/api/recipes/{id}/addFavoriteRecipe": {
       "post": {
         "tags": [
-          "Favorites"
+          "Favorite recipes"
         ],
-        "summary": "Add recipe to favorites",
-        "description": "Added to favorites recipes",
+        "summary": "Add a recipe to user's favorites",
+        "description": "Allows an authenticated user to add a specific recipe to their list of favorite recipes.",
         "operationId": "addFavoriteRecipe",
         "security": [
           {
@@ -252,7 +314,7 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "Recipe ID",
+            "description": "Unique identifier of the recipe to be added to favorites",
             "schema": {
               "type": "string",
               "example": "66c5d22f8b1f2d5ad93f2e11"
@@ -261,7 +323,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Recipe successfully added to favorites",
+            "description": "The recipe was successfully added to the user's favorites",
             "content": {
               "application/json": {
                 "schema": {
