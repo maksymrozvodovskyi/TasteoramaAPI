@@ -25,7 +25,6 @@ properties:
     example: 'john.doe@example.com'
   avatar:
     type: string
-    nullable: true
     description: User's avatar URL or null
     format: uri
     example: 'https://example.com/avatars/user123.jpg'
