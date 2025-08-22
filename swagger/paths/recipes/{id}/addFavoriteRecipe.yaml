@@ -1,0 +1,28 @@
+tags:
+  - Favorites
+summary: Add recipe to favorites
+description: Added to favorites recipes
+operationId: addFavoriteRecipe
+security:
+  - bearerAuth: []
+parameters:
+  - name: id
+    in: path
+    required: true
+    description: Recipe ID
+    schema:
+      type: string
+      example: 66c5d22f8b1f2d5ad93f2e11
+responses:
+  '201':
+    description: Recipe successfully added to favorites
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/addFavoriteRecipe.yaml'
+  '400':
+    description: Bad Request
+  '401':
+    description: Unauthorized
+  '404':
+    description: Recipe not found
