@@ -11,13 +11,3 @@ properties:
     description: Category's name
     type: string
     example: Italian
-  createdAt:
-    description: Category creation date
-    type: string
-    format: date-time
-    example: '2024-01-15T20:30:45.123Z'
-  updatedAt:
-    description: Category last update date
-    type: string
-    format: date-time
-    example: '2024-01-15T20:30:45.123Z'
