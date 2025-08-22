@@ -3,6 +3,7 @@ import { deleteFavoriteRecipeController } from '../controllers/recipesController
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { authenticate } from '../middlewares/authenticate.js';
 import { validateId } from '../middlewares/validateID.js';
+import { addToFavorites } from '../controllers/favouritesController.js';
 
 const router = Router();
 
@@ -12,5 +13,7 @@ router.delete(
   validateId,
   ctrlWrapper(deleteFavoriteRecipeController),
 );
+
+router.post('/favorites/:recipeId', authenticate, addToFavorites);
 
 export default router;
