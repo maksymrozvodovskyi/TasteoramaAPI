@@ -19,6 +19,10 @@
   ],
   "tags": [
     {
+      "name": "Auth",
+      "description": "Auth operations."
+    },
+    {
       "name": "Categories",
       "description": "This is operations about categories"
     },
@@ -28,6 +32,89 @@
     }
   ],
   "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register",
+        "operationId": "register",
+        "description": "Register an account",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "name": {
+                    "description": "Username",
+                    "type": "string",
+                    "example": "Eva"
+                  },
+                  "email": {
+                    "description": "User's email",
+                    "type": "string",
+                    "example": "eva@example.com"
+                  },
+                  "password": {
+                    "description": "User's password",
+                    "type": "string",
+                    "example": "1234qwerty"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully registered a user!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User created successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "user": {
+                          "$ref": "#/components/schemas/user"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          }
+        }
+      }
+    },
     "/api/categories": {
       "get": {
         "tags": [
@@ -314,6 +401,59 @@
       }
     },
     "schemas": {
+      "user": {
+        "type": "object",
+        "required": [
+          "_id",
+          "name",
+          "email",
+          "favouriteRecipes",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "User's id",
+            "example": "68a62ca86864f4a1a5d5e0a9"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Eva"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "example": "eva@example.com"
+          },
+          "avatar": {
+            "type": "string",
+            "nullable": true,
+            "description": "User's avatar URL or null",
+            "example": null
+          },
+          "favouriteRecipes": {
+            "type": "array",
+            "description": "List of user's favorite recipes",
+            "items": {
+              "type": "string",
+              "example": "6462a8f74c3d0ddd28898069"
+            },
+            "example": []
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-20T20:14:32.633Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-20T20:14:32.633Z"
+          }
+        }
+      },
       "category": {
         "type": "object",
         "required": [
@@ -460,117 +600,172 @@
       }
     },
     "responses": {
-      "400": {
-        "description": "Bad Request",
-        "content": {
-          "application/json": {
-            "schema": {
+  "400": {
+    "description": "Bad Request",
+    "content": {
+      "application/json": {
+        "schema": {
+          "type": "object",
+          "required": [
+            "status",
+            "message",
+            "data"
+          ],
+          "properties": {
+            "status": {
+              "type": "integer",
+              "example": 400
+            },
+            "message": {
+              "type": "string",
+              "example": "Bad Request"
+            },
+            "data": {
               "type": "object",
               "required": [
-                "status",
-                "message",
-                "data"
+                "message"
               ],
               "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 400
-                },
                 "message": {
                   "type": "string",
                   "example": "Bad Request"
-                },
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
                 }
               }
             }
           }
         }
-      },
-      "404": {
-        "description": "Resource not found",
-        "content": {
-          "application/json": {
-            "schema": {
+      }
+    }
+  },
+      "409": {
+    "description": "Email is already in use",
+    "content": {
+      "application/json": {
+        "schema": {
+          "type": "object",
+          "required": [
+            "status",
+            "message",
+            "data"
+          ],
+          "properties": {
+            "status": {
+              "type": "integer",
+              "example": 409
+            },
+            "message": {
+              "type": "string",
+              "example": "ConflictError"
+            },
+            "data": {
               "type": "object",
               "required": [
-                "status",
                 "message"
               ],
               "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 404
-                },
                 "message": {
                   "type": "string",
-                  "example": "Resource not found"
+                  "example": "Email in use"
                 }
               }
             }
           }
         }
-      },
+      }
+    }
+  },
+      "409": {
+    "description": "Email is already in use",
+    "content": {
+      "application/json": {
+        "schema": {
+          "type": "object",
+          "required": [
+            "status",
+            "message",
+            "data"
+          ],
+          "properties": {
+            "status": {
+              "type": "integer",
+              "example": 409
+            },
+            "message": {
+              "type": "string",
+              "example": "ConflictError"
+            },
+            "data": {
+              "type": "object",
+              "required": [
+                "message"
+              ],
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Email in use"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
       "500": {
-        "description": "Internal server error",
-        "content": {
-          "application/json": {
-            "schema": {
+    "description": "Internal server error",
+    "content": {
+      "application/json": {
+        "schema": {
+          "type": "object",
+          "required": [
+            "status",
+            "message",
+            "data"
+          ],
+          "properties": {
+            "status": {
+              "type": "integer",
+              "example": 500
+            },
+            "message": {
+              "type": "string",
+              "example": "Internal server error"
+            },
+            "data": {
               "type": "object",
               "required": [
-                "status",
                 "message"
               ],
               "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 500
-                },
                 "message": {
                   "type": "string",
-                  "example": "Internal server error"
-                },
-                "data": {
-                  "type": "object",
-                  "required": [
-                    "message"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Something went wrong!"
-                    }
-                  }
+                  "example": "Something went wrong!"
                 }
               }
             }
           }
         }
-      },
-      "internalServerError": {
-        "description": "Internal server error",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 500
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Internal server error"
-                }
-              }
+      }
+    }
+  },
+  "internalServerError": {
+    "description": "Internal server error",
+    "content": {
+      "application/json": {
+        "schema": {
+          "type": "object",
+          "required": [
+            "status",
+            "message"
+          ],
+          "properties": {
+            "status": {
+              "type": "integer",
+              "example": 500
+            },
+            "message": {
+              "type": "string",
+              "example": "Internal server error"
             }
           }
         }

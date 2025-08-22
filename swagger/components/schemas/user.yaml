@@ -1,0 +1,41 @@
+type: object
+required:
+  - _id
+  - name
+  - email
+  - favouriteRecipes
+  - createdAt
+  - updatedAt
+properties:
+  _id:
+    type: string
+    description: User's id
+    example: 68a62ca86864f4a1a5d5e0a9
+  name:
+    type: string
+    description: User's name
+    example: Eva
+  email:
+    type: string
+    description: User's email
+    example: eva@example.com
+  avatar:
+    type: string
+    nullable: true
+    description: User's avatar URL or null
+    example: null
+  favouriteRecipes:
+    type: array
+    description: List of user's favorite recipes
+    items:
+      type: string
+      example: 6462a8f74c3d0ddd28898069
+    example: []
+  createdAt:
+    type: string
+    format: date-time
+    example: 2025-08-20T20:14:32.633Z
+  updatedAt:
+    type: string
+    format: date-time
+    example: 2025-08-20T20:14:32.633Z
