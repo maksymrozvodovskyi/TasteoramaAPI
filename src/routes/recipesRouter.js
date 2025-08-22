@@ -17,6 +17,8 @@ import {
   createOwnRecipeController,
   getOwnRecipesController,
 } from '../controllers/recipes.js';
+import { addToFavorites } from '../controllers/favouritesController.js';
+import { getRecipeByIdController } from '../controllers/recipes.js';
 import { isValidId } from '../middlewares/isValidId.js';
 
 const router = Router();
@@ -38,8 +40,15 @@ router.get('/:id', isValidId, ctrlWrapper(getRecipeByIdController));
 router.delete(
   '/favorites/:recipeId',
   authenticate,
-  validateId,
+  isValidId,
   ctrlWrapper(deleteFavoriteRecipeController),
+);
+
+router.post(
+  '/favorites/:recipeId',
+  isValidId,
+  authenticate,
+  ctrlWrapper(addToFavorites),
 );
 
 router.post(

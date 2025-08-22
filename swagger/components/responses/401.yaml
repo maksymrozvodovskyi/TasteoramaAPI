@@ -1,4 +1,4 @@
-description: Bad Request
+description: Unauthorized
 content:
   application/json:
     schema:
@@ -10,10 +10,10 @@ content:
       properties:
         status:
           type: integer
-          example: 400
+          example: 401
         message:
           type: string
-          example: Bad Request
+          example: UnauthorizedError
         data:
           type: object
           required:
@@ -21,4 +21,5 @@ content:
           properties:
             message:
               type: string
-              example: "Bad Request"
+              example: 'Session not found'
+
