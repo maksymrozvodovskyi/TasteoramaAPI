@@ -18,7 +18,7 @@ const usersSchema = new Schema(
       type: String,
       required: true,
     },
-    favouriteRecipes: [
+    favoritesRecipes: [
       {
         type: Schema.Types.ObjectId,
         ref: 'recipes',
