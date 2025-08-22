@@ -57,7 +57,6 @@ requestBody:
                 measure:
                   type: string
                   example: '175g'
-
 responses:
   '201':
     description: Creates a recipe
