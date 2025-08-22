@@ -18,6 +18,15 @@ import { isValidId } from '../middlewares/isValidId.js';
 
 const router = Router();
 
+// всі маршрути тільки для авторизованого користувача
+router.use(authenticate);
+
+// GET /api/recipes/own → отримання власних рецептів
+router.get('/own', ctrlWrapper(getOwnRecipesController));
+
+// POST /api/recipes/own → створення з прив’язкою до owner
+router.post('/own', ctrlWrapper(createOwnRecipeController));
+
 router.get('/:id', isValidId, ctrlWrapper(getRecipeByIdController));
 
 router.delete(
@@ -35,14 +44,5 @@ router.post(
   authenticate,
   ctrlWrapper(createNewRecipeController),
 );
-
-// всі маршрути тільки для авторизованого користувача
-router.use(authenticate);
-
-// GET /api/recipes/own → отримання власних рецептів
-router.get('/own', ctrlWrapper(getOwnRecipesController));
-
-// POST /api/recipes/own → створення з прив’язкою до owner
-router.post('/own', ctrlWrapper(createOwnRecipeController));
 
 export default router;
