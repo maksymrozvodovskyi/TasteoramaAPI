@@ -1,7 +1,6 @@
 import { RecipesCollection } from '../db/models/recipe.js';
 import { getFavoriteRecipes } from '../services/deleteFavoriteRecipe.js';
 
-// GET / api / recipes / favorite;
 export const getFavoriteRecipesController = async (req, res) => {
   const recipes = await getFavoriteRecipes(req.user._id);
 
