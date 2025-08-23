@@ -4,7 +4,6 @@ import {
   getOwnRecipes,
 } from '../services/deleteFavoriteRecipe.js';
 
-// Отримання власних рецептів
 export const getOwnRecipesController = async (req, res) => {
   const recipes = await getOwnRecipes(req.user._id);
 
