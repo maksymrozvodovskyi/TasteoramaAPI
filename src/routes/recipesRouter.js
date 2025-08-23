@@ -13,9 +13,8 @@ import { getRecipeByIdController } from '../controllers/recipes.js';
 import { isValidId } from '../middlewares/isValidId.js';
 
 const router = Router();
-router.get('/', ctrlWrapper(handleSearchRecipes));
 
-router.post('/favorites/:recipeId', authenticate, addToFavorites);
+router.get('/', ctrlWrapper(handleSearchRecipes));
 
 router.get('/:id', isValidId, ctrlWrapper(getRecipeByIdController));
 
@@ -41,6 +40,5 @@ router.post(
   authenticate,
   ctrlWrapper(createNewRecipeController),
 );
-
 
 export default router;
