@@ -1,15 +1,15 @@
 import { Router } from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
-import { handleSearchRecipes } from '../controllers/recipe.js';
-import { addToFavorites } from '../controllers/favouritesController.js';
+import { handleSearchRecipes } from '../controllers/handleSearchRecipes.js';
+import { addToFavorites } from '../controllers/addToFavoritesRecipe.js';
 import { authenticate } from '../middlewares/authenticate.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { upload } from '../middlewares/multer.js';
 import { createRecipeSchema } from '../validation/recipe.validation.js';
 import { createNewRecipeController } from '../controllers/createNewRecipeController.js';
 import { parseFormDataJson } from '../middlewares/parseFormDataJson.js';
-import { deleteFavoriteRecipeController } from '../controllers/recipesController.js';
-import { getRecipeByIdController } from '../controllers/recipes.js';
+import { deleteFavoriteRecipeController } from '../controllers/deleteFavoriteRecipe.js';
+import { getRecipeByIdController } from '../controllers/getRecipeById.js';
 import { isValidId } from '../middlewares/isValidId.js';
 
 const router = Router();
