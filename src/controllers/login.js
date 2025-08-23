@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors';
-import { loginUser } from '../services/authLogin.js';
+import { loginUser } from '../services/loginUser.js';
 
 export const loginUserController = async (req, res) => {
   const { email, password } = req.body;

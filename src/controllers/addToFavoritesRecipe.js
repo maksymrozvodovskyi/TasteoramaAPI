@@ -30,6 +30,7 @@ export const addToFavorites = async (req, res) => {
   }
 
   user.favoritesRecipes.push(recipe._id);
+
   await user.save();
 
   await user.populate('favouriteRcipes');

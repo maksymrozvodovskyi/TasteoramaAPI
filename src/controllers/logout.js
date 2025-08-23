@@ -1,4 +1,4 @@
-import { logoutUser } from '../services/authLogout.js';
+import { logoutUser } from '../services/logoutUser.js';
 
 export const logoutController = async (req, res) => {
   if (req.cookies.sessionId) {
