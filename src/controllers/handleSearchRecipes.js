@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors';
-import { searchRecipesService } from '../services/recipe.js';
+import { searchRecipesService } from '../services/searchRecipesService.js';
 import { parseNumber } from '../utils/parsePaginationParams.js';
 
 export const handleSearchRecipes = async (req, res) => {

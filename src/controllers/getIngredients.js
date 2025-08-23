@@ -1,4 +1,4 @@
-import { getAllIngredients } from '../services/ingredients.js';
+import { getAllIngredients } from '../services/getAllIngredients.js';
 
 export const getIngredientsController = async (req, res) => {
   const ingredients = await getAllIngredients();
