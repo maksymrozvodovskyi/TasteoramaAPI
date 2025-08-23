@@ -49,7 +49,6 @@ paths:
   /api/users:
     get:
       $ref: '../swagger/paths/users.yaml'
-  
 components:
   securitySchemes:
     bearerAuth:
@@ -58,4 +57,3 @@ components:
   schemas:
     Recipe:
       $ref: '../swagger/components/schemas/Recipe.yaml'
-  
