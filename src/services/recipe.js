@@ -1,6 +1,5 @@
 import { RecipesCollection } from '../db/models/recipe.js';
 import { IngredientsCollection } from '../db/models/ingredient.js';
-import { CategoriesCollection } from '../db/models/category.js';
 
 export const searchRecipesService = async ({
   category,
