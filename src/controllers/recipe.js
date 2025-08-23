@@ -1,6 +1,6 @@
-import createHttpError from "http-errors";
-import { searchRecipesService } from "../services/recipe.js";
-import { parseNumber } from "../utils/parsePaginationParams.js";
+import createHttpError from 'http-errors';
+import { searchRecipesService } from '../services/recipe.js';
+import { parseNumber } from '../utils/parsePaginationParams.js';
 
 export const handleSearchRecipes = async (req, res) => {
   try {
@@ -14,14 +14,14 @@ export const handleSearchRecipes = async (req, res) => {
       ingredients,
       title,
       skip,
-      limit: perPage,
+      limit: 12,
     });
 
     const totalPages = Math.ceil(totalResults / perPage);
 
     res.status(200).json({
       status: 200,
-      message: "Successfully found recipes",
+      message: 'Successfully found recipes',
       data: {
         recipes,
         page,
@@ -34,6 +34,6 @@ export const handleSearchRecipes = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    throw createHttpError(500, "Server error");
+    throw createHttpError(500, 'Server error');
   }
 };
