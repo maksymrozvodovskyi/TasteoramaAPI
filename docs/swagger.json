@@ -318,162 +318,60 @@
         }
       }
     },
-    "/api/recipes/favorites/{id}": {
-      "delete": {
+    "/api/recipes": {
+      "get": {
         "tags": [
           "Recipes"
         ],
-        "summary": "Remove recipe from favorites",
-        "operationId": "deleteFavoriteRecipe",
-        "description": "Remove a recipe from the user's list of favorite recipes by ID",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "summary": "Search recipes by category, ingredients, or title",
+        "description": "Returns a paginated list of recipes matching the search criteria",
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
-            "required": true,
+            "in": "query",
+            "name": "category",
             "schema": {
               "type": "string",
-              "example": "6462a8f74c3d0ddd28897fcd"
+              "example": "Lamb"
             },
-            "description": "ID of the recipe to remove from favorites"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully removed recipe from favorites",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Recipe removed from favorites"
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Category name to filter recipes"
           },
-          "401": {
-            "$ref": "#/components/responses/401"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "500": {
-            "$ref": "#/components/responses/internalServerError"
-          }
-        }
-      }
-    },
-    "/api/recipes/{id}/addFavoriteRecipe": {
-      "post": {
-        "tags": [
-          "Favorite recipes"
-        ],
-        "summary": "Add a recipe to user's favorites",
-        "description": "Allows an authenticated user to add a specific recipe to their list of favorite recipes.",
-        "operationId": "addFavoriteRecipe",
-        "security": [
           {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "Unique identifier of the recipe to be added to favorites",
+            "in": "query",
+            "name": "ingredients",
             "schema": {
               "type": "string",
-              "example": "66c5d22f8b1f2d5ad93f2e11"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The recipe was successfully added to the user's favorites",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/addFavoriteRecipe"
-                }
-              }
-            }
+              "example": "Tomato,Cheese"
+            },
+            "description": "Comma-separated list of ingredient names or IDs"
           },
-          "409": {
-            "$ref": "#/components/responses/409"
-          }
-        }
-      }
-    },
-    "/api/users": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Get current user",
-        "operationId": "getUser",
-        "description": "Get current authenticated user information",
-        "security": [
           {
-            "bearerAuth": []
+            "in": "query",
+            "name": "title",
+            "schema": {
+              "type": "string",
+              "example": "Soup"
+            },
+            "description": "Partial title to search"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number for pagination"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully found user!",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully found user!"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/user"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
+            "$ref": "#/components/responses/RecipesList"
           },
           "500": {
-            "$ref": "#/components/responses/internalServerError"
+            "$ref": "#/components/responses/500"
           }
         }
-      }
-    },
-    "/api/recipes": {
+      },
       "post": {
         "tags": [
           "Recipes"
@@ -649,6 +547,161 @@
           }
         }
       }
+    },
+    "/api/recipes/favorites/{id}": {
+      "delete": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Remove recipe from favorites",
+        "operationId": "deleteFavoriteRecipe",
+        "description": "Remove a recipe from the user's list of favorite recipes by ID",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "6462a8f74c3d0ddd28897fcd"
+            },
+            "description": "ID of the recipe to remove from favorites"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed recipe from favorites",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Recipe removed from favorites"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/internalServerError"
+          }
+        }
+      }
+    },
+    "/api/recipes/{id}/addFavoriteRecipe": {
+      "post": {
+        "tags": [
+          "Favorite recipes"
+        ],
+        "summary": "Add a recipe to user's favorites",
+        "description": "Allows an authenticated user to add a specific recipe to their list of favorite recipes.",
+        "operationId": "addFavoriteRecipe",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier of the recipe to be added to favorites",
+            "schema": {
+              "type": "string",
+              "example": "66c5d22f8b1f2d5ad93f2e11"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The recipe was successfully added to the user's favorites",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/addFavoriteRecipe"
+                }
+              }
+            }
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get current user",
+        "operationId": "getUser",
+        "description": "Get current authenticated user information",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found user!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found user!"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/internalServerError"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -656,6 +709,354 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "Recipe": {
+        "type": "object",
+        "required": [
+          "_id",
+          "title",
+          "category",
+          "owner",
+          "instructions",
+          "description",
+          "time",
+          "ingredients"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique identifier of the recipe",
+            "example": "6462a8f74c3d0ddd28897fcd"
+          },
+          "title": {
+            "type": "string",
+            "description": "Recipe's title",
+            "example": "Battenberg Cake"
+          },
+          "category": {
+            "type": "string",
+            "description": "Recipe's category",
+            "example": "Dessert"
+          },
+          "owner": {
+            "type": "string",
+            "description": "ID of the user who created the recipe",
+            "example": "64c8d958249fae54bae90bb9"
+          },
+          "area": {
+            "type": "string",
+            "description": "Recipe's area or origin",
+            "example": "British"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Recipe's instructions",
+            "example": "Heat oven to 180C/160C fan/gas 4 and line the base..."
+          },
+          "description": {
+            "type": "string",
+            "description": "Recipe's description",
+            "example": "A classic British cake made with almond sponge cake..."
+          },
+          "thumb": {
+            "type": "string",
+            "format": "binary",
+            "description": "Recipe's photo",
+            "example": "https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg"
+          },
+          "time": {
+            "type": "string",
+            "description": "Recipe's cooking time in minutes",
+            "example": "60"
+          },
+          "ingredients": {
+            "type": "array",
+            "description": "List of ingredients with measurements",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "measure"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Ingredient ID",
+                  "example": "640c2dd963a319ea671e367e"
+                },
+                "measure": {
+                  "type": "string",
+                  "description": "Amount of ingredient",
+                  "example": "175g"
+                }
+              }
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-03-11T10:25:33.243Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-03-03T16:47:51.976Z"
+          }
+        }
+      },
+      "user": {
+        "type": "object",
+        "title": "User",
+        "description": "User account information with personal details and preferences",
+        "required": [
+          "_id",
+          "name",
+          "email",
+          "favouriteRecipes",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "User unique identifier",
+            "pattern": "^[0-9a-fA-F]{24}$",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's full name",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "User's unique email address used for authentication and notifications",
+            "example": "john.doe@example.com"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "User's avatar URL or null",
+            "format": "uri",
+            "example": "https://example.com/avatars/user123.jpg"
+          },
+          "favouriteRecipes": {
+            "type": "array",
+            "description": "Collection of recipe IDs that the user has marked as favorites",
+            "items": {
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{24}$",
+              "description": "MongoDB ObjectId reference to a recipe document",
+              "example": "6462a8f74c3d0ddd28898069"
+            },
+            "example": [
+              "507f1f77bcf86cd799439012",
+              "507f1f77bcf86cd799439013"
+            ],
+            "default": []
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "User creation timestamp",
+            "example": "2024-01-15T10:30:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "User update timestamp",
+            "readOnly": true,
+            "example": "2024-01-15T10:30:00.000Z"
+          }
+        },
+        "example": {
+          "_id": "507f1f77bcf86cd799439011",
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "avatar": "https://example.com/avatars/user123.jpg",
+          "favouriteRecipes": [
+            "507f1f77bcf86cd799439012",
+            "507f1f77bcf86cd799439013"
+          ],
+          "createdAt": "2024-01-15T10:30:00.000Z",
+          "updatedAt": "2024-01-15T10:30:00.000Z"
+        }
+      },
+      "category": {
+        "type": "object",
+        "title": "Category",
+        "description": "Food category used to classify and organize recipes",
+        "required": [
+          "_id",
+          "name"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Category's unique identifier",
+            "pattern": "^[0-9a-fA-F]{24}$",
+            "example": "65ca67e7ae7f10c88b598384"
+          },
+          "name": {
+            "type": "string",
+            "description": "Category's name",
+            "example": "Italian"
+          }
+        },
+        "example": {
+          "_id": "65ca67e7ae7f10c88b598384",
+          "name": "Italian"
+        }
+      },
+      "ingredient": {
+        "type": "object",
+        "title": "Ingredient",
+        "description": "Ingredient information used in recipes with details and visual representation",
+        "required": [
+          "_id",
+          "name",
+          "desc",
+          "img"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Ingredient's id",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{24}$",
+            "example": "65ca67e7ae7f10c88b598384"
+          },
+          "name": {
+            "type": "string",
+            "example": "Tomato"
+          },
+          "desc": {
+            "type": "string",
+            "example": "Fresh red tomato, perfect for salads and cooking"
+          },
+          "img": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/images/tomato.png"
+          }
+        },
+        "example": {
+          "_id": "65ca67e7ae7f10c88b598384",
+          "name": "Tomato",
+          "desc": "Fresh red tomato, perfect for salads and cooking",
+          "img": "https://example.com/images/tomato.png"
+        }
+      },
+      "recipe": {
+        "type": "object",
+        "required": [
+          "_id",
+          "title",
+          "category",
+          "owner",
+          "instructions",
+          "description",
+          "time",
+          "ingredients"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique identifier of the recipe",
+            "example": "6462a8f74c3d0ddd28897fcd"
+          },
+          "title": {
+            "type": "string",
+            "description": "Recipe's title",
+            "example": "Battenberg Cake"
+          },
+          "category": {
+            "type": "string",
+            "description": "Recipe's category",
+            "example": "Dessert"
+          },
+          "owner": {
+            "type": "string",
+            "description": "ID of the user who created the recipe",
+            "example": "64c8d958249fae54bae90bb9"
+          },
+          "area": {
+            "type": "string",
+            "description": "Recipe's area or origin",
+            "example": "British"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Recipe's instructions",
+            "example": "Heat oven to 180C/160C fan/gas 4 and line the base..."
+          },
+          "description": {
+            "type": "string",
+            "description": "Recipe's description",
+            "example": "A classic British cake made with almond sponge cake..."
+          },
+          "thumb": {
+            "type": "string",
+            "format": "binary",
+            "description": "Recipe's photo",
+            "example": "https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg"
+          },
+          "time": {
+            "type": "string",
+            "description": "Recipe's cooking time in minutes",
+            "example": "60"
+          },
+          "ingredients": {
+            "type": "array",
+            "description": "List of ingredients with measurements",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "measure"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Ingredient ID",
+                  "example": "640c2dd963a319ea671e367e"
+                },
+                "measure": {
+                  "type": "string",
+                  "description": "Amount of ingredient",
+                  "example": "175g"
+                }
+              }
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-03-11T10:25:33.243Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-03-03T16:47:51.976Z"
+          }
+        }
+      },
+      "addFavoriteRecipe": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Recipe added to favorites"
+          },
+          "favorites": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "689a4c53a949749869605279"
+            }
+          }
+        }
       }
     },
     "responses": {
@@ -830,6 +1231,40 @@
           }
         }
       },
+      "RecipesList": {
+        "description": "List of recipes with paginator",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "perPage": {
+                  "type": "integer",
+                  "example": 12
+                },
+                "totalPages": {
+                  "type": "integer",
+                  "example": 5
+                },
+                "totalResults": {
+                  "type": "integer",
+                  "example": 60
+                },
+                "recipes": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Recipe"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "internalServerError": {
         "description": "Internal server error",
         "content": {
@@ -851,260 +1286,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "schemas": {
-      "user": {
-        "type": "object",
-        "title": "User",
-        "description": "User account information with personal details and preferences",
-        "required": [
-          "_id",
-          "name",
-          "email",
-          "favouriteRecipes",
-          "createdAt",
-          "updatedAt"
-        ],
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "User unique identifier",
-            "pattern": "^[0-9a-fA-F]{24}$",
-            "example": "507f1f77bcf86cd799439011"
-          },
-          "name": {
-            "type": "string",
-            "description": "User's full name",
-            "example": "John Doe"
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "description": "User's unique email address used for authentication and notifications",
-            "example": "john.doe@example.com"
-          },
-          "avatar": {
-            "type": "string",
-            "description": "User's avatar URL or null",
-            "format": "uri",
-            "example": "https://example.com/avatars/user123.jpg"
-          },
-          "favouriteRecipes": {
-            "type": "array",
-            "description": "Collection of recipe IDs that the user has marked as favorites",
-            "items": {
-              "type": "string",
-              "pattern": "^[0-9a-fA-F]{24}$",
-              "description": "MongoDB ObjectId reference to a recipe document",
-              "example": "6462a8f74c3d0ddd28898069"
-            },
-            "example": [
-              "507f1f77bcf86cd799439012",
-              "507f1f77bcf86cd799439013"
-            ],
-            "default": []
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "User creation timestamp",
-            "example": "2024-01-15T10:30:00Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "User update timestamp",
-            "readOnly": true,
-            "example": "2024-01-15T10:30:00.000Z"
-          }
-        },
-        "example": {
-          "_id": "507f1f77bcf86cd799439011",
-          "name": "John Doe",
-          "email": "john.doe@example.com",
-          "avatar": "https://example.com/avatars/user123.jpg",
-          "favouriteRecipes": [
-            "507f1f77bcf86cd799439012",
-            "507f1f77bcf86cd799439013"
-          ],
-          "createdAt": "2024-01-15T10:30:00.000Z",
-          "updatedAt": "2024-01-15T10:30:00.000Z"
-        }
-      },
-      "category": {
-        "type": "object",
-        "title": "Category",
-        "description": "Food category used to classify and organize recipes",
-        "required": [
-          "_id",
-          "name"
-        ],
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Category's unique identifier",
-            "pattern": "^[0-9a-fA-F]{24}$",
-            "example": "65ca67e7ae7f10c88b598384"
-          },
-          "name": {
-            "type": "string",
-            "description": "Category's name",
-            "example": "Italian"
-          }
-        },
-        "example": {
-          "_id": "65ca67e7ae7f10c88b598384",
-          "name": "Italian"
-        }
-      },
-      "ingredient": {
-        "type": "object",
-        "title": "Ingredient",
-        "description": "Ingredient information used in recipes with details and visual representation",
-        "required": [
-          "_id",
-          "name",
-          "desc",
-          "img"
-        ],
-        "properties": {
-          "_id": {
-            "description": "Ingredient's id",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{24}$",
-            "example": "65ca67e7ae7f10c88b598384"
-          },
-          "name": {
-            "type": "string",
-            "example": "Tomato"
-          },
-          "desc": {
-            "type": "string",
-            "example": "Fresh red tomato, perfect for salads and cooking"
-          },
-          "img": {
-            "type": "string",
-            "format": "uri",
-            "example": "https://example.com/images/tomato.png"
-          }
-        },
-        "example": {
-          "_id": "65ca67e7ae7f10c88b598384",
-          "name": "Tomato",
-          "desc": "Fresh red tomato, perfect for salads and cooking",
-          "img": "https://example.com/images/tomato.png"
-        }
-      },
-      "addFavoriteRecipe": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "example": "Recipe added to favorites"
-          },
-          "favorites": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "example": "689a4c53a949749869605279"
-            }
-          }
-        }
-      },
-      "recipe": {
-        "type": "object",
-        "required": [
-          "_id",
-          "title",
-          "category",
-          "owner",
-          "instructions",
-          "description",
-          "time",
-          "ingredients"
-        ],
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Unique identifier of the recipe",
-            "example": "6462a8f74c3d0ddd28897fcd"
-          },
-          "title": {
-            "type": "string",
-            "description": "Recipe's title",
-            "example": "Battenberg Cake"
-          },
-          "category": {
-            "type": "string",
-            "description": "Recipe's category",
-            "example": "Dessert"
-          },
-          "owner": {
-            "type": "string",
-            "description": "ID of the user who created the recipe",
-            "example": "64c8d958249fae54bae90bb9"
-          },
-          "area": {
-            "type": "string",
-            "description": "Recipe's area or origin",
-            "example": "British"
-          },
-          "instructions": {
-            "type": "string",
-            "description": "Recipe's instructions",
-            "example": "Heat oven to 180C/160C fan/gas 4 and line the base..."
-          },
-          "description": {
-            "type": "string",
-            "description": "Recipe's description",
-            "example": "A classic British cake made with almond sponge cake..."
-          },
-          "thumb": {
-            "type": "string",
-            "format": "binary",
-            "description": "Recipe's photo",
-            "example": "https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg"
-          },
-          "time": {
-            "type": "string",
-            "description": "Recipe's cooking time in minutes",
-            "example": "60"
-          },
-          "ingredients": {
-            "type": "array",
-            "description": "List of ingredients with measurements",
-            "items": {
-              "type": "object",
-              "required": [
-                "id",
-                "measure"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "Ingredient ID",
-                  "example": "640c2dd963a319ea671e367e"
-                },
-                "measure": {
-                  "type": "string",
-                  "description": "Amount of ingredient",
-                  "example": "175g"
-                }
-              }
-            }
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2023-03-11T10:25:33.243Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2024-03-03T16:47:51.976Z"
           }
         }
       }

@@ -1,0 +1,34 @@
+tags:
+  - Recipes
+summary: Search recipes by category, ingredients, or title
+description: Returns a paginated list of recipes matching the search criteria
+parameters:
+  - in: query
+    name: category
+    schema:
+      type: string
+      example: "Lamb"
+    description: Category name to filter recipes
+  - in: query
+    name: ingredients
+    schema:
+      type: string
+      example: "Tomato,Cheese"
+    description: Comma-separated list of ingredient names or IDs
+  - in: query
+    name: title
+    schema:
+      type: string
+      example: "Soup"
+    description: Partial title to search
+  - in: query
+    name: page
+    schema:
+      type: integer
+      default: 1
+    description: Page number for pagination
+responses:
+  '200':
+    $ref: '../../components/responses/RecipesList.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

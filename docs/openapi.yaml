@@ -34,7 +34,7 @@ paths:
       $ref: '../swagger/paths/ingredients.yaml'
   /api/recipes:
     get:
-      $ref: '../swagger/paths/recipe/recipes.yaml'
+      $ref: '../swagger/paths/recipes/search.yaml'
     post:
       $ref: '../swagger/paths/recipes/post.yaml'
   /api/recipes/{id}:
@@ -49,12 +49,7 @@ paths:
   /api/users:
     get:
       $ref: '../swagger/paths/users.yaml'
-  /api/recipes:
-    post:
-      $ref: '../swagger/paths/recipes/post.yaml'
-  /api/recipes/{id}:
-    get:
-      $ref: '../swagger/paths/recipes/{id}/get.yaml'
+  
 components:
   securitySchemes:
     bearerAuth:
@@ -63,6 +58,4 @@ components:
   schemas:
     Recipe:
       $ref: '../swagger/components/schemas/Recipe.yaml'
-  responses:
-    RecipesList:
-      $ref: '../swagger/components/responses/RecipesList.yaml'
+  
