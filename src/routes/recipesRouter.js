@@ -50,9 +50,9 @@ router.post(
 router.post(
   '/',
   authenticate,
+  upload.single('thumb'),
   parseFormDataJson,
   validateBody(createRecipeSchema),
-  upload.single('thumb'),
   ctrlWrapper(createNewRecipeController),
 );
 
