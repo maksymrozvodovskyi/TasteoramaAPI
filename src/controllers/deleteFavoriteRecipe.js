@@ -18,7 +18,6 @@ export async function deleteFavoriteRecipeController(req, res, next) {
     res.status(200).json({
       status: 200,
       message: 'Recipe removed from favorites',
-      // favouriteRecipes: updatedUser.favouriteRecipes,
     });
   } catch (error) {
     next(error);
