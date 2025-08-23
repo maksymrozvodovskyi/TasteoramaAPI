@@ -1,7 +1,8 @@
 import createHttpError from 'http-errors';
 import { categories } from '../constants/categories.js';
+import fs from 'node:fs/promises';
 
-export const parseFormDataJson = (req, res, next) => {
+export const parseFormDataJson = async (req, res, next) => {
   if (!req.body) {
       throw createHttpError(400, 'Bad Request');
     }
@@ -12,7 +13,10 @@ export const parseFormDataJson = (req, res, next) => {
     if (!categories.includes(req.body.category)) {
       throw createHttpError(400, 'Invalid category');
     }
-    } catch (err) {
+  } catch (err) {
+      if (req.file) {
+        await fs.unlink(req.file.path);
+      }
       throw createHttpError(400, err.message);
     }
 
