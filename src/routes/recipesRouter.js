@@ -17,6 +17,7 @@ import {
 } from '../controllers/recipes.js';
 import { deleteFavoriteRecipeController } from '../controllers/deleteFavoriteRecipe.js';
 import { isValidId } from '../middlewares/isValidId.js';
+import { validateId } from '../middlewares/validateID.js';
 
 const router = Router();
 
@@ -39,7 +40,7 @@ router.delete(
 
 router.post(
   '/favorites/:recipeId',
-  isValidId,
+  validateId,
   authenticate,
   ctrlWrapper(addToFavorites),
 );

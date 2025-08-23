@@ -33,7 +33,7 @@ export const addToFavorites = async (req, res) => {
 
   await user.save();
 
-  await user.populate('favouriteRcipes');
+  await user.populate('favoritesRecipes');
 
   res.status(201).json({
     message: 'Recipe added to favorites',
