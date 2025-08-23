@@ -18,14 +18,6 @@ export const getOwnRecipes = async (userId) => {
   );
 };
 
-// Створення з прив’язкою до owner
-export const createOwnRecipe = async (payload, userId) => {
-  return RecipesCollection.create({
-    ...payload,
-    owner: userId,
-  });
-};
-
 export const getRecipeById = async (recipeId) => {
   return RecipesCollection.findOne({ _id: recipeId });
 };

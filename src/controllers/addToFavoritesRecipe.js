@@ -1,5 +1,5 @@
 import { RecipesCollection } from '../db/models/recipe.js';
-import { getFavoriteRecipes } from '../services/recipesServices.js';
+import { getFavoriteRecipes } from '../services/deleteFavoriteRecipe.js';
 
 // GET / api / recipes / favorite;
 export const getFavoriteRecipesController = async (req, res) => {

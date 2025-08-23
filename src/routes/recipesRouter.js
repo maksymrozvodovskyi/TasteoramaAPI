@@ -4,17 +4,15 @@ import { handleSearchRecipes } from '../controllers/handleSearchRecipes.js';
 import {
   addToFavorites,
   getFavoriteRecipesController,
-} from '../controllers/favouritesController.js';
+} from '../controllers/addToFavoritesRecipe.js';
 import { authenticate } from '../middlewares/authenticate.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { upload } from '../middlewares/multer.js';
 import { createRecipeSchema } from '../validation/recipe.validation.js';
 import { createNewRecipeController } from '../controllers/createNewRecipeController.js';
 import { parseFormDataJson } from '../middlewares/parseFormDataJson.js';
-import { validateId } from '../middlewares/validateID.js';
 import {
   getRecipeByIdController,
-  createOwnRecipeController,
   getOwnRecipesController,
 } from '../controllers/recipes.js';
 import { deleteFavoriteRecipeController } from '../controllers/deleteFavoriteRecipe.js';
@@ -22,14 +20,8 @@ import { isValidId } from '../middlewares/isValidId.js';
 
 const router = Router();
 
-// всі маршрути тільки для авторизованого користувача
-router.use(authenticate);
-
 // GET /api/recipes/own → отримання власних рецептів
-router.get('/own', ctrlWrapper(getOwnRecipesController));
-
-// POST /api/recipes/own → створення з прив’язкою до owner
-router.post('/own', ctrlWrapper(createOwnRecipeController));
+router.get('/own', authenticate, ctrlWrapper(getOwnRecipesController));
 
 // GET /api/recipes/favorite → отримання улюблених рецептів
 router.get('/favorite', ctrlWrapper(getFavoriteRecipesController));
