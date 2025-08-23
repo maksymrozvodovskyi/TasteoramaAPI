@@ -1,9 +1,15 @@
 import { RecipesCollection } from '../db/models/recipe.js';
 import { getFavoriteRecipes } from '../services/recipesServices.js';
 
+// GET / api / recipes / favorite;
 export const getFavoriteRecipesController = async (req, res) => {
   const recipes = await getFavoriteRecipes(req.user._id);
-  res.json(recipes);
+
+  res.json({
+    status: 200,
+    message: 'Successfully fetched favorite recipes!',
+    data: recipes,
+  });
 };
 
 export const addToFavorites = async (req, res) => {

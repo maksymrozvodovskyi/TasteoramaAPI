@@ -17,8 +17,7 @@ import {
   createOwnRecipeController,
   getOwnRecipesController,
 } from '../controllers/recipes.js';
-import { addToFavorites } from '../controllers/favouritesController.js';
-import { getRecipeByIdController } from '../controllers/recipes.js';
+// import { addToFavorites } from '../controllers/favouritesController.js';
 import { isValidId } from '../middlewares/isValidId.js';
 
 const router = Router();

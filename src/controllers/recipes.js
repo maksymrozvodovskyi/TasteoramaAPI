@@ -8,13 +8,23 @@ import {
 // Отримання власних рецептів
 export const getOwnRecipesController = async (req, res) => {
   const recipes = await getOwnRecipes(req.user._id);
-  res.json(recipes);
+
+  res.json({
+    status: 200,
+    message: 'Successfully fetched own recipes!',
+    data: recipes,
+  });
 };
 
 // Створення нового рецепту
 export const createOwnRecipeController = async (req, res) => {
   const recipe = await createOwnRecipe(req.body, req.user._id);
-  res.status(201).json(recipe);
+
+  res.status(201).json({
+    status: 201,
+    message: 'Successfully created own recipe!',
+    data: recipe,
+  });
 };
 
 export const getRecipeByIdController = async (req, res, next) => {
