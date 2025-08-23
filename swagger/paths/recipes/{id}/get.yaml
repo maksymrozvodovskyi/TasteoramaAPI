@@ -1,0 +1,39 @@
+tags:
+  - Recipes
+summary: Get recipe by id
+operationId: getRecipe
+description: Retrieve a single recipe by its unique identifier.
+security: []
+
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: 6462a8f74c3d0ddd28897fcd
+
+responses:
+  '200':
+    description: Successfully found recipe with id
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully get recipe with id
+            data:
+              $ref: ../../../components/schemas/recipe.yaml
+  '404':
+    $ref: ../../../components/responses/404.yaml
+  '500':
+    $ref: ../../../components/responses/500.yaml

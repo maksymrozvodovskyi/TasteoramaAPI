@@ -1,4 +1,6 @@
 type: object
+title: Ingredient
+description: Ingredient information used in recipes with details and visual representation
 required:
   - _id
   - name
@@ -8,16 +10,20 @@ properties:
   _id:
     description: Ingredient's id
     type: string
-    example: 65ca67e7ae7f10c88b598384
+    pattern: '^[0-9a-fA-F]{24}$'
+    example: '65ca67e7ae7f10c88b598384'
   name:
-    description: Ingredient's name
     type: string
-    example: Tomato
+    example: 'Tomato'
   desc:
-    description: Ingredient's description
     type: string
-    example: Fresh red tomato
+    example: 'Fresh red tomato, perfect for salads and cooking'
   img:
-    description: Ingredient's image URL
     type: string
-    example: https://example.com/images/tomato.png
+    format: uri
+    example: 'https://example.com/images/tomato.png'
+example:
+  _id: '65ca67e7ae7f10c88b598384'
+  name: 'Tomato'
+  desc: 'Fresh red tomato, perfect for salads and cooking'
+  img: 'https://example.com/images/tomato.png'
