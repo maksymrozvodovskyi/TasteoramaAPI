@@ -31,10 +31,10 @@ router.post(
 
 router.post(
   '/',
+  authenticate,
   upload.single('thumb'),
   parseFormDataJson,
   validateBody(createRecipeSchema),
-  authenticate,
   ctrlWrapper(createNewRecipeController),
 );
 

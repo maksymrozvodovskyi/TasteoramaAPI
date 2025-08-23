@@ -78,5 +78,5 @@ responses:
             data:
               type: object
               $ref: '../../components/schemas/recipe.yaml'
-  '500':
-    $ref: '../../components/responses/internalServerError.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
