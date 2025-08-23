@@ -24,12 +24,15 @@ const router = Router();
 // GET /api/recipes/own → отримання власних рецептів
 router.get('/own', authenticate, ctrlWrapper(getOwnRecipesController));
 
-// GET /api/recipes/favorite → отримання улюблених рецептів
-router.get('/favorite', ctrlWrapper(getFavoriteRecipesController));
-
 router.get('/', ctrlWrapper(handleSearchRecipes));
 
 router.get('/:id', isValidId, ctrlWrapper(getRecipeByIdController));
+
+router.get(
+  '/favorites',
+  authenticate,
+  ctrlWrapper(getFavoriteRecipesController),
+);
 
 router.delete(
   '/favorites/:recipeId',
