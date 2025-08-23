@@ -33,8 +33,8 @@ paths:
     get:
       $ref: '../swagger/paths/ingredients.yaml'
   /api/recipes:
-    # get:
-    #   $ref: '../swagger/paths/recipe/recipes.yaml'
+    get:
+      $ref: '../swagger/paths/recipes/search.yaml'
     post:
       $ref: '../swagger/paths/recipes/post.yaml'
   /api/recipes/{id}:
