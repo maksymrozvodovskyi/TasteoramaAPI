@@ -21,7 +21,6 @@ import { validateId } from '../middlewares/validateID.js';
 
 const router = Router();
 
-// GET /api/recipes/own → отримання власних рецептів
 router.get('/own', authenticate, ctrlWrapper(getOwnRecipesController));
 
 router.get('/', ctrlWrapper(handleSearchRecipes));
