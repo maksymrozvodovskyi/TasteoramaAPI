@@ -15,12 +15,37 @@ parameters:
       example: 66c5d22f8b1f2d5ad93f2e11
 responses:
   '201':
-    description: The recipe was successfully added to the user's favorites
+    description: Recipe added to favorites
     content:
       application/json:
         schema:
-          $ref: '../../../components/schemas/addFavoriteRecipe.yaml'
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Recipe added to favorites
+            data:
+              type: object
+              required:
+                - recipeId
+                - title
+              properties:
+                recipeId:
+                  type: string
+                  example: 66c5d22f8b1f2d5ad93f2e11
+                title:
+                  type: string
+                  example: Chocolate Cake
   '401':
-    $ref: ../../../components/responses/401.yaml
+    $ref: '../../../components/responses/401.yaml'
   '404':
-    $ref: ../../../components/responses/404.yaml
+    $ref: '../../../components/responses/404.yaml'
+  '409':
+    $ref: ../../../components/responses/409.yaml

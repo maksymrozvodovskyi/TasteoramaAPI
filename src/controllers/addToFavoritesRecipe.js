@@ -25,7 +25,10 @@ export const addToFavorites = async (req, res) => {
   );
 
   if (alreadyInFavorites) {
-    return res.status(409).json({ message: 'Already in favorites' });
+    return res.status(409).json({
+      status: 409,
+      message: 'Already in favorites',
+    });
   }
 
   user.favoritesRecipes.push(recipe._id);

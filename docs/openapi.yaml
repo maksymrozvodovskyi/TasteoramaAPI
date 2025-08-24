@@ -43,7 +43,6 @@ paths:
   /api/recipes/favorites/{id}:
     delete:
       $ref: '../swagger/paths/recipes/favorites/{id}/delete.yaml'
-  /api/recipes/{id}/addFavoriteRecipe:
     post:
       $ref: '../swagger/paths/recipes/{id}/addFavoriteRecipe.yaml'
   /api/users:
