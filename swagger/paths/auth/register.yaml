@@ -1,6 +1,6 @@
 tags:
   - Auth
-summary: Register
+summary: Register User
 operationId: registerUser
 description: Register an account
 security: []
