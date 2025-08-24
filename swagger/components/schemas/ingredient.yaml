@@ -10,20 +10,20 @@ properties:
   _id:
     description: Ingredient's id
     type: string
-    pattern: '^[0-9a-fA-F]{24}$'
-    example: '65ca67e7ae7f10c88b598384'
+    pattern: ^[0-9a-fA-F]{24}$
+    example: 65ca67e7ae7f10c88b598384
   name:
     type: string
-    example: 'Tomato'
+    example: Tomato
   desc:
     type: string
-    example: 'Fresh red tomato, perfect for salads and cooking'
+    example: Fresh red tomato, perfect for salads and cooking
   img:
     type: string
     format: uri
-    example: 'https://example.com/images/tomato.png'
+    example: https://example.com/images/tomato.png
 example:
-  _id: '65ca67e7ae7f10c88b598384'
-  name: 'Tomato'
-  desc: 'Fresh red tomato, perfect for salads and cooking'
-  img: 'https://example.com/images/tomato.png'
+  _id: 65ca67e7ae7f10c88b598384
+  name: Tomato
+  desc: Fresh red tomato, perfect for salads and cooking
+  img: https://example.com/images/tomato.png

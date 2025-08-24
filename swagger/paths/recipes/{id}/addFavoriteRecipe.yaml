@@ -21,28 +21,79 @@ responses:
         schema:
           type: object
           required:
-            - status
             - message
-            - data
+            - favoritesRecipes
           properties:
-            status:
-              type: integer
-              example: 201
             message:
               type: string
               example: Recipe added to favorites
-            data:
-              type: object
-              required:
-                - recipeId
-                - title
-              properties:
-                recipeId:
-                  type: string
-                  example: 66c5d22f8b1f2d5ad93f2e11
-                title:
-                  type: string
-                  example: Chocolate Cake
+            favoritesRecipes:
+              type: array
+              items:
+                type: object
+                required:
+                  - _id
+                  - title
+                  - category
+                  - owner
+                  - area
+                  - instructions
+                  - description
+                  - thumb
+                  - time
+                  - ingredients
+                  - createdAt
+                  - updatedAt
+                properties:
+                  _id:
+                    type: string
+                    example: 6462a8f74c3d0ddd28897fcd
+                  title:
+                    type: string
+                    example: Battenberg Cake
+                  category:
+                    type: string
+                    example: Dessert
+                  owner:
+                    type: string
+                    example: 64c8d958249fae54bae90bb9
+                  area:
+                    type: string
+                    example: British
+                  instructions:
+                    type: string
+                    example: Heat oven to 180C/160C fan/gas 4 and line the base...
+                  description:
+                    type: string
+                    example: A classic British cake made with almond sponge cake...
+                  thumb:
+                    type: string
+                    example: https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg
+                  time:
+                    type: string
+                    example: '60'
+                  ingredients:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - id
+                        - measure
+                      properties:
+                        id:
+                          type: string
+                          example: 640c2dd963a319ea671e367e
+                        measure:
+                          type: string
+                          example: 175g
+                  createdAt:
+                    type: string
+                    format: date-time
+                    example: 2023-03-11T19:25:33.243Z
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    example: 2024-03-03T22:47:51.976Z
   '401':
     $ref: '../../../components/responses/401.yaml'
   '404':
