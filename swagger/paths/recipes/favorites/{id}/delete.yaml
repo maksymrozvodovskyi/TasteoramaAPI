@@ -40,4 +40,4 @@ responses:
     $ref: '../../../../components/responses/404.yaml'
 
   '500':
-    $ref: '../../../../components/responses/internalServerError.yaml'
+    $ref: ../../../../components/responses/500.yaml
