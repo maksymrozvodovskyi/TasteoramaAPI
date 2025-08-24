@@ -21,5 +21,4 @@ content:
           properties:
             message:
               type: string
-              example: 'Session not found'
-
+              example: Session not found

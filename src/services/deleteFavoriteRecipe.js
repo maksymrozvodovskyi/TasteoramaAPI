@@ -1,7 +1,6 @@
 import { UsersCollection } from '../db/models/user.js';
 import { RecipesCollection } from '../db/models/recipe.js';
 
-// Отримати всі улюблені рецепти користувача
 export const getFavoriteRecipes = async (userId) => {
   const user = await UsersCollection.findById(userId).populate(
     'favoritesRecipes',
@@ -10,7 +9,6 @@ export const getFavoriteRecipes = async (userId) => {
   return user.favoritesRecipes;
 };
 
-// Отримання власних рецептів
 export const getOwnRecipes = async (userId) => {
   return RecipesCollection.find({ owner: userId }).populate(
     'ingredients.id',

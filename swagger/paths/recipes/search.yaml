@@ -9,19 +9,19 @@ parameters:
     name: category
     schema:
       type: string
-      example: 'Lamb'
+      example: Lamb
     description: Category name to filter recipes
   - in: query
     name: ingredients
     schema:
       type: string
-      example: 'Tomato,Cheese'
+      example: Tomato,Cheese
     description: Comma-separated list of ingredient names or IDs
   - in: query
     name: title
     schema:
       type: string
-      example: 'Soup'
+      example: Soup
     description: Partial title to search
   - in: query
     name: page

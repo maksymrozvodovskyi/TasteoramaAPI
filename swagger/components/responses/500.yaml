@@ -20,4 +20,4 @@ content:
           properties:
             message:
               type: string
-              example: 'Something went wrong!'
+              example: Something went wrong

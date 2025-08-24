@@ -21,4 +21,4 @@ content:
           properties:
             message:
               type: string
-              example: "Bad Request"
+              example: Bad Request

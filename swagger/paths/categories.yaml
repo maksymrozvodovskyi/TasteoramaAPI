@@ -2,7 +2,7 @@ tags:
   - Categories
 summary: Get list of categories
 operationId: getCategories
-description: 'Get list of food categories with this endpoint'
+description: Get list of food categories with this endpoint
 security: []
 responses:
   '200':

@@ -2,7 +2,7 @@ tags:
   - Ingredients
 summary: Get list of ingredients
 operationId: getIngredients
-description: 'Get list of food ingredients with this endpoint'
+description: Get list of food ingredients with this endpoint
 security: []
 responses:
   '200':

@@ -5,7 +5,6 @@ description: Retrieve all recipes created by the authorized user.
 operationId: getOwnRecipes
 security:
   - bearerAuth: []
-
 responses:
   '200':
     description: Successfully retrieved user's own recipes
@@ -30,7 +29,5 @@ responses:
     $ref: '../../../components/responses/401.yaml'
   '404':
     $ref: '../../../components/responses/404.yaml'
-  '409':
-    $ref: '../../../components/responses/409.yaml'
   '500':
     $ref: '../../../components/responses/500.yaml'
