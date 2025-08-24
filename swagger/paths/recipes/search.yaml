@@ -32,5 +32,5 @@ parameters:
 responses:
   '200':
     $ref: '../../components/responses/RecipesList.yaml'
-  '500':
-    $ref: '../../components/responses/500.yaml'
+  '401':
+    $ref: ../../components/responses/401.yaml

@@ -2,7 +2,7 @@ tags:
   - Auth
 summary: Login User
 operationId: loginUser
-description: 'Authenticate User with email and password'
+description: Authenticate User with email and password
 security: []
 requestBody:
   content:
@@ -23,7 +23,7 @@ requestBody:
             example: 'password123'
 responses:
   '200':
-    description: 'User successfully logged in'
+    description: User successfully logged in
     content:
       application/json:
         schema:
@@ -38,7 +38,7 @@ responses:
               example: 200
             message:
               type: string
-              example: 'Successfully logged in an user!'
+              example: Successfully logged in an user!
             data:
               type: object
               required:
@@ -46,10 +46,8 @@ responses:
               properties:
                 accesToken:
                   type: string
-                  example: 'Sad3SNuuobrYmM6o5iQtKHlxUgKIO/KZK4fdm6w+'
+                  example: Sad3SNuuobrYmM6o5iQtKHlxUgKIO/KZK4fdm6w+
   '400':
     $ref: '../../../components/responses/400.yaml'
   '401':
     $ref: '../../../components/responses/401.yaml'
-  '500':
-    $ref: '../../../components/responses/500.yaml'

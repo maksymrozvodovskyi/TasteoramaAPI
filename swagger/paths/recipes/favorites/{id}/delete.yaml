@@ -5,16 +5,14 @@ operationId: deleteFavoriteRecipe
 description: Remove a recipe from the user's list of favorite recipes by ID
 security:
   - bearerAuth: []
-
 parameters:
   - in: path
     name: id
     required: true
     schema:
       type: string
-      example: '6462a8f74c3d0ddd28897fcd'
+      example: 6462a8f74c3d0ddd28897fcd
     description: ID of the recipe to remove from favorites
-
 responses:
   '200':
     description: Successfully removed recipe from favorites
@@ -32,12 +30,7 @@ responses:
             message:
               type: string
               example: Recipe removed from favorites
-
   '401':
     $ref: '../../../../components/responses/401.yaml'
-
   '404':
     $ref: '../../../../components/responses/404.yaml'
-
-  '500':
-    $ref: ../../../../components/responses/500.yaml
