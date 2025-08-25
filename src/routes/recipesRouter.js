@@ -7,7 +7,6 @@ import {
 } from '../controllers/addToFavoritesRecipe.js';
 import { authenticate } from '../middlewares/authenticate.js';
 import { validateBody } from '../middlewares/validateBody.js';
-import { upload } from '../middlewares/multer.js';
 import { createRecipeSchema } from '../validation/recipe.validation.js';
 import { createNewRecipeController } from '../controllers/createNewRecipeController.js';
 import { parseFormDataJson } from '../middlewares/parseFormDataJson.js';
@@ -18,6 +17,7 @@ import {
 import { deleteFavoriteRecipeController } from '../controllers/deleteFavoriteRecipe.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { validateId } from '../middlewares/validateID.js';
+import { uploadThumb } from '../utils/uploadThumb.js';
 
 const router = Router();
 
@@ -50,7 +50,7 @@ router.post(
 router.post(
   '/',
   authenticate,
-  upload.single('thumb'),
+  uploadThumb,
   parseFormDataJson,
   validateBody(createRecipeSchema),
   ctrlWrapper(createNewRecipeController),
