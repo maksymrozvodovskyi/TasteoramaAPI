@@ -1,3 +1,4 @@
+// services/searchRecipesService.js
 import { RecipesCollection } from '../db/models/recipe.js';
 import { IngredientsCollection } from '../db/models/ingredient.js';
 
@@ -18,13 +19,18 @@ export const searchRecipesService = async ({
     const ingArray = ingredients.split(',').map((i) => i.trim());
 
     const ingDocs = await IngredientsCollection.find({
-      name: { $in: ingArray.map((i) => new RegExp(`^${i}$`, 'i')) },
+      name: { $in: ingArray.map((i) => new RegExp(i, 'i')) },
     });
 
+    console.log('Found ingredients:', ingDocs);
+
     if (ingDocs.length > 0) {
-      const ingIds = ingDocs.map((i) => i._id.toString());
+      const ingIds = ingDocs.map((i) => i._id);
+      console.log('Ingredient IDs for filter:', ingIds);
+
       filter['ingredients.id'] = { $in: ingIds };
     } else {
+      console.log('No ingredients matched');
       return { totalResults: 0, recipes: [] };
     }
   }
@@ -35,7 +41,12 @@ export const searchRecipesService = async ({
 
   const totalResults = await RecipesCollection.countDocuments(filter);
 
-  const recipes = await RecipesCollection.find(filter).skip(skip).limit(limit);
+  const recipes = await RecipesCollection.find(filter)
+    .skip(skip)
+    .limit(limit)
+    .populate('ingredients.id');
+
+  console.log('Final filter:', filter);
 
   return { totalResults, recipes };
 };

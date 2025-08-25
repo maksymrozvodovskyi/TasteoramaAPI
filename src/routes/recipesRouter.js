@@ -22,10 +22,6 @@ const router = Router();
 
 router.get('/own', authenticate, ctrlWrapper(getOwnRecipesController));
 
-router.get('/', ctrlWrapper(handleSearchRecipes));
-
-router.get('/:recipeId', validateId, ctrlWrapper(getRecipeByIdController));
-
 router.get(
   '/favorites',
   authenticate,
@@ -41,10 +37,14 @@ router.delete(
 
 router.post(
   '/favorites/:recipeId',
-  validateId,
   authenticate,
+  validateId,
   ctrlWrapper(addToFavorites),
 );
+
+router.get('/', ctrlWrapper(handleSearchRecipes));
+
+router.get('/:recipeId', validateId, ctrlWrapper(getRecipeByIdController));
 
 router.post(
   '/',
@@ -54,5 +54,4 @@ router.post(
   validateBody(createRecipeSchema),
   ctrlWrapper(createNewRecipeController),
 );
-
 export default router;
