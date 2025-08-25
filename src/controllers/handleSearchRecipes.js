@@ -1,10 +1,10 @@
-import createHttpError from 'http-errors';
 import { searchRecipesService } from '../services/searchRecipesService.js';
 import { parseNumber } from '../utils/parsePaginationParams.js';
 
 export const handleSearchRecipes = async (req, res) => {
   try {
     const { category, ingredients, title } = req.query;
+
     const page = parseNumber(req.query.page, 1);
     const perPage = parseNumber(req.query.perPage, 12);
     const skip = (page - 1) * perPage;
@@ -14,7 +14,7 @@ export const handleSearchRecipes = async (req, res) => {
       ingredients,
       title,
       skip,
-      limit: 12,
+      limit: perPage,
     });
 
     const totalPages = Math.ceil(totalResults / perPage);
@@ -33,7 +33,11 @@ export const handleSearchRecipes = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error(error);
-    throw createHttpError(500, 'Server error');
+    console.error('Search Recipes Error:', error);
+    res.status(500).json({
+      status: 500,
+      message: 'InternalServerError',
+      data: { message: error.message },
+    });
   }
 };

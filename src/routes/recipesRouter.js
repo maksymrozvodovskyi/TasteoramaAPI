@@ -15,7 +15,6 @@ import {
   getOwnRecipesController,
 } from '../controllers/recipes.js';
 import { deleteFavoriteRecipeController } from '../controllers/deleteFavoriteRecipe.js';
-import { isValidId } from '../middlewares/isValidId.js';
 import { validateId } from '../middlewares/validateID.js';
 import { uploadThumb } from '../utils/uploadThumb.js';
 
@@ -25,7 +24,7 @@ router.get('/own', authenticate, ctrlWrapper(getOwnRecipesController));
 
 router.get('/', ctrlWrapper(handleSearchRecipes));
 
-router.get('/:id', isValidId, ctrlWrapper(getRecipeByIdController));
+router.get('/:recipeId', validateId, ctrlWrapper(getRecipeByIdController));
 
 router.get(
   '/favorites',

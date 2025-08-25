@@ -16,19 +16,24 @@ export const searchRecipesService = async ({
 
   if (ingredients) {
     const ingArray = ingredients.split(',').map((i) => i.trim());
+
     const ingDocs = await IngredientsCollection.find({
-      name: { $in: ingArray.map((i) => new RegExp(i, 'i')) },
+      name: { $in: ingArray.map((i) => new RegExp(`^${i}$`, 'i')) },
     });
 
     if (ingDocs.length > 0) {
       const ingIds = ingDocs.map((i) => i._id.toString());
       filter['ingredients.id'] = { $in: ingIds };
+    } else {
+      return { totalResults: 0, recipes: [] };
     }
   }
 
   if (title) {
     filter.title = { $regex: title, $options: 'i' };
   }
+
+  console.log('Filter for Mongo:', JSON.stringify(filter, null, 2));
 
   const totalResults = await RecipesCollection.countDocuments(filter);
 
