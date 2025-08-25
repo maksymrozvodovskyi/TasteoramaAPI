@@ -610,7 +610,7 @@
       },
       "post": {
         "tags": [
-          "Favorite recipes"
+          "Recipes"
         ],
         "summary": "Add a recipe to user's favorites",
         "description": "Allows an authenticated user to add a specific recipe to their list of favorite recipes.",
