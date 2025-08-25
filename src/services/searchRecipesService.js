@@ -33,8 +33,6 @@ export const searchRecipesService = async ({
     filter.title = { $regex: title, $options: 'i' };
   }
 
-  console.log('Filter for Mongo:', JSON.stringify(filter, null, 2));
-
   const totalResults = await RecipesCollection.countDocuments(filter);
 
   const recipes = await RecipesCollection.find(filter).skip(skip).limit(limit);
