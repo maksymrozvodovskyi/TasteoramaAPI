@@ -2,7 +2,7 @@ tags:
   - Ingredients
 summary: Get list of ingredients
 operationId: getIngredients
-description: 'Get list of food ingredients with this endpoint'
+description: Get list of food ingredients with this endpoint
 security: []
 responses:
   '200':
@@ -29,4 +29,4 @@ responses:
   '400':
     $ref: ../components/responses/400.yaml
   '500':
-    $ref: '../components/responses/internalServerError.yaml'
+    $ref: ../components/responses/500.yaml

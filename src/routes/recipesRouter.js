@@ -36,7 +36,7 @@ router.get(
 router.delete(
   '/favorites/:recipeId',
   authenticate,
-  isValidId,
+  validateId,
   ctrlWrapper(deleteFavoriteRecipeController),
 );
 

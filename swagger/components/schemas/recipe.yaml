@@ -1,4 +1,6 @@
 type: object
+title: Recipe
+description: Recipe information
 required:
   - _id
   - title

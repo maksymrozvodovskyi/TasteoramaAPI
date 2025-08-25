@@ -2,16 +2,17 @@ import bcrypt from 'bcryptjs';
 import { UsersCollection } from '../db/models/user.js';
 import { SessionsCollection } from '../db/models/session.js';
 import { randomBytes } from 'crypto';
+import createHttpError from 'http-errors';
 
 export const loginUser = async (email, password) => {
   const user = await UsersCollection.findOne({ email });
   if (!user) {
-    return null;
+    throw createHttpError(401, 'User not found');
   }
 
   const passwordCompare = await bcrypt.compare(password, user.password);
   if (!passwordCompare) {
-    return null;
+    throw createHttpError(401, 'Unauthorized');
   }
 
   await SessionsCollection.deleteOne({ userId: user._id });

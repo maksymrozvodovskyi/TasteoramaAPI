@@ -6,6 +6,6 @@ description: 'Logout a user'
 security: []
 responses:
   '204':
-    description: Successfully logged out. No content returned.
+    description: Successfully logged out
   '401':
-    description: Unauthorized - no valid session found.
+    $ref: ../../../components/responses/401.yaml

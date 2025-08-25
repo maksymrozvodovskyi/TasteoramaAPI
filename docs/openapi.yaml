@@ -17,12 +17,12 @@ servers:
   - url: http://127.0.0.1:3000
   - url: https://tasteoramaapi.onrender.com
 paths:
-  /auth/login:
-    post:
-      $ref: '../swagger/paths/auth/login/post.yaml'
   /auth/register:
     post:
       $ref: '../swagger/paths/auth/register.yaml'
+  /auth/login:
+    post:
+      $ref: '../swagger/paths/auth/login/post.yaml'
   /auth/logout:
     post:
       $ref: '../swagger/paths/auth/logout/post.yaml'
@@ -33,27 +33,29 @@ paths:
     get:
       $ref: '../swagger/paths/ingredients.yaml'
   /api/recipes:
-    # get:
-    #   $ref: '../swagger/paths/recipe/recipes.yaml'
+    get:
+      $ref: '../swagger/paths/recipes/search.yaml'
     post:
       $ref: '../swagger/paths/recipes/post.yaml'
   /api/recipes/{id}:
     get:
       $ref: '../swagger/paths/recipes/{id}/get.yaml'
   /api/recipes/favorites/{id}:
-    delete:
-      $ref: '../swagger/paths/recipes/favorites/{id}/delete.yaml'
-  /api/recipes/{id}/addFavoriteRecipe:
     post:
       $ref: '../swagger/paths/recipes/{id}/addFavoriteRecipe.yaml'
+    delete:
+      $ref: '../swagger/paths/recipes/favorites/{id}/delete.yaml'
   /api/users:
     get:
       $ref: '../swagger/paths/users.yaml'
+  /api/recipes/own:
+    get:
+      $ref: '../swagger/paths/recipes/own/get.yaml'
+  /api/recipes/favorites:
+    get:
+      $ref: '../swagger/paths/recipes/favorites/get.yaml'
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-  schemas:
-    Recipe:
-      $ref: '../swagger/components/schemas/Recipe.yaml'
