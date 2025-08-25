@@ -94,6 +94,8 @@ responses:
                     type: string
                     format: date-time
                     example: 2024-03-03T22:47:51.976Z
+  '400':
+    $ref: ../../../components/responses/400.yaml
   '401':
     $ref: '../../../components/responses/401.yaml'
   '404':
