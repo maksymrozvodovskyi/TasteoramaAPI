@@ -1,10 +1,23 @@
 tags:
   - Recipes
 summary: Get user's own recipes
-description: Retrieve all recipes created by the authorized user.
+description: Retrieve paginated recipes created by the authorized user.
 operationId: getOwnRecipes
 security:
   - bearerAuth: []
+parameters:
+  - in: query
+    name: page
+    schema:
+      type: integer
+      default: 1
+    description: Page number (starts from 1)
+  - in: query
+    name: perPage
+    schema:
+      type: integer
+      default: 12
+    description: Number of recipes per page
 responses:
   '200':
     description: Successfully retrieved user's own recipes
@@ -18,11 +31,32 @@ responses:
               example: 200
             message:
               type: string
-              example: Successfully retrieved user's own recipes!
+              example: Successfully fetched own recipes!
             data:
-              type: array
-              items:
-                $ref: '../../../components/schemas/recipe.yaml'
+              type: object
+              properties:
+                recipes:
+                  type: array
+                  items:
+                    $ref: '../../../components/schemas/recipe.yaml'
+                page:
+                  type: integer
+                  example: 2
+                perPage:
+                  type: integer
+                  example: 12
+                totalResults:
+                  type: integer
+                  example: 50
+                totalPages:
+                  type: integer
+                  example: 5
+                hasPreviousPage:
+                  type: boolean
+                  example: true
+                hasNextPage:
+                  type: boolean
+                  example: true
   '401':
     $ref: '../../../components/responses/401.yaml'
   '404':

@@ -6,7 +6,11 @@ import {
 
 export const getOwnRecipesController = async (req, res) => {
   const { page = 1, perPage = 12 } = req.query;
-  const { recipes, total } = await getOwnRecipes(req.user._id, page, perPage);
+  const { recipes, total } = await getOwnRecipes(
+    req.user._id,
+    Number(page),
+    Number(perPage),
+  );
 
   const totalPages = Math.ceil(total / perPage);
 

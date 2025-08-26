@@ -2,7 +2,7 @@ import { UsersCollection } from '../db/models/user.js';
 import { RecipesCollection } from '../db/models/recipe.js';
 
 export const getFavoriteRecipes = async (userId, page = 1, perPage = 12) => {
-  const skip = (page - 1) * perPage;
+  const skip = page > 0 ? (page - 1) * perPage : 0;
 
   const user = await UsersCollection.findById(userId).populate({
     path: 'favoritesRecipes',
@@ -10,18 +10,18 @@ export const getFavoriteRecipes = async (userId, page = 1, perPage = 12) => {
     populate: { path: 'ingredients.id', select: 'title' },
   });
 
-  if (!user) return { recipes: [], total: 0, skip };
+  if (!user) return { recipes: [], total: 0 };
 
   const totalUser = await UsersCollection.findById(userId).select(
     'favoritesRecipes',
   );
   const total = totalUser?.favoritesRecipes.length || 0;
 
-  return { recipes: user.favoritesRecipes, total, skip };
+  return { recipes: user.favoritesRecipes, total };
 };
 
 export const getOwnRecipes = async (userId, page = 1, perPage = 12) => {
-  const skip = (page - 1) * perPage;
+  const skip = page > 0 ? (page - 1) * perPage : 0;
 
   const [recipes, total] = await Promise.all([
     RecipesCollection.find({ owner: userId })
@@ -31,7 +31,7 @@ export const getOwnRecipes = async (userId, page = 1, perPage = 12) => {
     RecipesCollection.countDocuments({ owner: userId }),
   ]);
 
-  return { recipes, total, skip };
+  return { recipes, total };
 };
 
 export const getRecipeById = async (recipeId) => {

@@ -1,10 +1,23 @@
 tags:
   - Recipes
 summary: Get favorite recipes
-description: Get all favorite recipes of the authorized user.
+description: Retrieve paginated favorite recipes of the authorized user.
 operationId: getFavoriteRecipes
 security:
   - bearerAuth: []
+parameters:
+  - in: query
+    name: page
+    schema:
+      type: integer
+      default: 1
+    description: Page number (starts from 1)
+  - in: query
+    name: perPage
+    schema:
+      type: integer
+      default: 12
+    description: Number of recipes per page
 responses:
   '200':
     description: Successfully retrieved favorite recipes
@@ -18,12 +31,33 @@ responses:
               example: 200
             message:
               type: string
-              example: Successfully retrieved favorite recipes!
+              example: Successfully fetched favorite recipes!
             data:
-              type: array
-              items:
-                $ref: '../../../components/schemas/recipe.yaml'
+              type: object
+              properties:
+                recipes:
+                  type: array
+                  items:
+                    $ref: '../../../components/schemas/recipe.yaml'
+                page:
+                  type: integer
+                  example: 1
+                perPage:
+                  type: integer
+                  example: 12
+                totalResults:
+                  type: integer
+                  example: 30
+                totalPages:
+                  type: integer
+                  example: 3
+                hasPreviousPage:
+                  type: boolean
+                  example: false
+                hasNextPage:
+                  type: boolean
+                  example: true
   '401':
-    $ref: ../../../components/responses/401.yaml
+    $ref: '../../../components/responses/401.yaml'
   '404':
     $ref: '../../../components/responses/404.yaml'

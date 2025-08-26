@@ -5,8 +5,8 @@ export const getFavoriteRecipesController = async (req, res) => {
   const { page = 1, perPage = 12 } = req.query;
   const { recipes, total } = await getFavoriteRecipes(
     req.user._id,
-    page,
-    perPage,
+    Number(page),
+    Number(perPage),
   );
 
   const totalPages = Math.ceil(total / perPage);
