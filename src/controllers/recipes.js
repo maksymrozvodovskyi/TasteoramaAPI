@@ -6,21 +6,22 @@ import {
 
 export const getOwnRecipesController = async (req, res) => {
   const { page = 1, perPage = 12 } = req.query;
-  const { recipes, total, skip } = await getOwnRecipes(
-    req.user._id,
-    page,
-    perPage,
-  );
+  const { recipes, total } = await getOwnRecipes(req.user._id, page, perPage);
 
-  res.json({
+  const totalPages = Math.ceil(total / perPage);
+
+  res.status(200).json({
     status: 200,
     message: 'Successfully fetched own recipes!',
-    data: recipes,
-    page: Number(page),
-    perPage: Number(perPage),
-    skip,
-    totalPages: Math.ceil(total / perPage),
-    totalItems: total,
+    data: {
+      recipes,
+      page: Number(page),
+      perPage: Number(perPage),
+      totalResults: total,
+      totalPages,
+      hasPreviousPage: page > 1,
+      hasNextPage: page < totalPages,
+    },
   });
 };
 
