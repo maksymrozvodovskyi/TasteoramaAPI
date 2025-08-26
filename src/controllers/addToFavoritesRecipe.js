@@ -2,12 +2,22 @@ import { RecipesCollection } from '../db/models/recipe.js';
 import { getFavoriteRecipes } from '../services/deleteFavoriteRecipe.js';
 
 export const getFavoriteRecipesController = async (req, res) => {
-  const recipes = await getFavoriteRecipes(req.user._id);
+  const { page = 1, perPage = 12 } = req.query;
+  const { recipes, total, skip } = await getFavoriteRecipes(
+    req.user._id,
+    page,
+    perPage,
+  );
 
   res.json({
     status: 200,
     message: 'Successfully fetched favorite recipes!',
     data: recipes,
+    page: Number(page),
+    perPage: Number(perPage),
+    skip,
+    totalPages: Math.ceil(total / perPage),
+    totalItems: total,
   });
 };
 

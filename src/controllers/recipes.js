@@ -5,12 +5,22 @@ import {
 } from '../services/deleteFavoriteRecipe.js';
 
 export const getOwnRecipesController = async (req, res) => {
-  const recipes = await getOwnRecipes(req.user._id);
+  const { page = 1, perPage = 12 } = req.query;
+  const { recipes, total, skip } = await getOwnRecipes(
+    req.user._id,
+    page,
+    perPage,
+  );
 
   res.json({
     status: 200,
     message: 'Successfully fetched own recipes!',
     data: recipes,
+    page: Number(page),
+    perPage: Number(perPage),
+    skip,
+    totalPages: Math.ceil(total / perPage),
+    totalItems: total,
   });
 };
 
