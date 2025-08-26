@@ -8,7 +8,7 @@ info:
   description: This is a documentation of Tasteoramaapi
 tags:
   - name: Auth
-    description: Registration and login
+    description: Registration, login and logout
   - name: Categories
     description: This is operations about categories
   - name: Recipes

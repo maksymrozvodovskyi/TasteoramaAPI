@@ -17,7 +17,7 @@
   "tags": [
     {
       "name": "Auth",
-      "description": "Registration and login"
+      "description": "Registration, login and logout"
     },
     {
       "name": "Categories",
