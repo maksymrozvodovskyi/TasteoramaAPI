@@ -6,6 +6,7 @@ import { validateBody } from '../middlewares/validateBody.js';
 import { registerSchema } from '../validation/auth.validation.js';
 import { loginSchema } from '../validation/auth.validation.js';
 import { loginUserController } from '../controllers/login.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const router = Router();
 
@@ -15,7 +16,7 @@ router.post(
   ctrlWrapper(registerUserController),
 );
 
-router.post('/logout', ctrlWrapper(logoutController));
+router.post('/logout', authenticate, ctrlWrapper(logoutController));
 
 router.post(
   '/login',
