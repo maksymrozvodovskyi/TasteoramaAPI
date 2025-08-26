@@ -7,6 +7,6 @@ security:
   - bearerAuth: []
 responses:
   '204':
-    description: Successfully logged out
+    description: Successfully logged out (No Content)
   '401':
     $ref: ../../../components/responses/401.yaml
