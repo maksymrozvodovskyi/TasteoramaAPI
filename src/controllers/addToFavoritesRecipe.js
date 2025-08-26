@@ -2,7 +2,7 @@ import { RecipesCollection } from '../db/models/recipe.js';
 import { getFavoriteRecipes } from '../services/deleteFavoriteRecipe.js';
 
 export const getFavoriteRecipesController = async (req, res) => {
-  const { page = 1, perPage = 10 } = req.query;
+  const { page = 1, perPage = 12 } = req.query;
   const { recipes, total } = await getFavoriteRecipes(
     req.user._id,
     page,
