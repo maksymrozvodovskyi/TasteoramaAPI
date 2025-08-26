@@ -14,7 +14,6 @@ tags:
   - name: Recipes
     description: This is operations about recipes
 servers:
-  - url: http://127.0.0.1:3000
   - url: https://tasteoramaapi.onrender.com
 paths:
   /auth/register:
