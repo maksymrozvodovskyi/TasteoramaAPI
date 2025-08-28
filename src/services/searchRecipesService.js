@@ -18,15 +18,15 @@ export const searchRecipesService = async ({
     const ingArray = ingredients.split(',').map((i) => i.trim());
 
     const ingDocs = await IngredientsCollection.find({
-      name: { $in: ingArray.map((i) => new RegExp(i, 'i')) },
+      name: { $in: ingArray.map((i) => new RegExp(`^${i}$`, 'i')) },
     });
 
-    if (ingDocs.length > 0) {
-      const ingIds = ingDocs.map((i) => i._id);
-      filter['ingredients.id'] = { $in: ingIds };
-    } else {
+    if (ingDocs.length !== ingArray.length) {
       return { totalResults: 0, recipes: [] };
     }
+
+    const ingIds = ingDocs.map((i) => i._id);
+    filter['ingredients.id'] = { $all: ingIds };
   }
 
   if (title) {
@@ -38,7 +38,7 @@ export const searchRecipesService = async ({
   const recipes = await RecipesCollection.find(filter)
     .skip(skip)
     .limit(limit)
-    .populate('ingredients.id');
+    .populate('ingredients', 'id');
 
   return { totalResults, recipes };
 };
