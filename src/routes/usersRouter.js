@@ -5,8 +5,6 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
 const router = Router();
 
-router.use(authenticate);
-
-router.get('/', ctrlWrapper(getUserController));
+router.get('/', authenticate, ctrlWrapper(getUserController));
 
 export default router;
