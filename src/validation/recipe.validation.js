@@ -14,6 +14,6 @@ export const createRecipeSchema = Joi.object({
         measure: Joi.string().required(),
       }),
     )
-    .min(1)
+    .min(2)
     .required(),
 });
