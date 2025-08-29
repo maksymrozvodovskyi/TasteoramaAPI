@@ -15,5 +15,6 @@ export const createRecipeSchema = Joi.object({
       }),
     )
     .min(2)
+    .max(16)
     .required(),
 });
