@@ -31,8 +31,11 @@ const recipesSchema = new Schema(
       type: String,
     },
     time: {
-      type: String,
+      type: Number,
       required: true,
+    },
+    calories: {
+      type: Number,
     },
     ingredients: [
       {

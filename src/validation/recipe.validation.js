@@ -5,7 +5,8 @@ export const createRecipeSchema = Joi.object({
   category: Joi.string().required(),
   instructions: Joi.string().max(1200).required(),
   description: Joi.string().max(200).required(),
-  time: Joi.string().min(1).max(360).required(),
+  time: Joi.number().min(1).max(360).required(),
+  calories: Joi.number().min(1).max(10000),
   ingredients: Joi.array()
     .items(
       Joi.object({
