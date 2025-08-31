@@ -417,7 +417,7 @@
                   "category": {
                     "type": "string",
                     "description": "Recipe's category",
-                    "example": "dessert"
+                    "example": "Dessert"
                   },
                   "instructions": {
                     "type": "string",
