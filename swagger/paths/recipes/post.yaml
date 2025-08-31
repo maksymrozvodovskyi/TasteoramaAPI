@@ -25,7 +25,7 @@ requestBody:
           category:
             type: string
             description: Recipe's category
-            example: dessert
+            example: Dessert
           instructions:
             type: string
             description: Recipe's instructions
@@ -35,9 +35,13 @@ requestBody:
             description: Recipe's description
             example: A classic British cake...
           time:
-            type: string
+            type: number
             description: Recipe's cooking time
             example: 120
+          calories:
+            type: number
+            description: Number of calories in recipe
+            example: 1200
           thumb:
             type: string
             format: binary

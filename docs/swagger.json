@@ -26,10 +26,18 @@
     {
       "name": "Recipes",
       "description": "This is operations about recipes"
+    },
+    {
+      "name": "Ingredients",
+      "description": "This is operations about ingredients"
+    },
+    {
+      "name": "User",
+      "description": "This is operations about user"
     }
   ],
   "paths": {
-    "/auth/register": {
+    "/api/auth/register": {
       "post": {
         "tags": [
           "Auth"
@@ -112,7 +120,7 @@
         }
       }
     },
-    "/auth/login": {
+    "/api/auth/login": {
       "post": {
         "tags": [
           "Auth"
@@ -193,7 +201,7 @@
         }
       }
     },
-    "/auth/logout": {
+    "/api/auth/logout": {
       "post": {
         "tags": [
           "Auth"
@@ -409,7 +417,7 @@
                   "category": {
                     "type": "string",
                     "description": "Recipe's category",
-                    "example": "dessert"
+                    "example": "Dessert"
                   },
                   "instructions": {
                     "type": "string",
@@ -422,9 +430,14 @@
                     "example": "A classic British cake..."
                   },
                   "time": {
-                    "type": "string",
+                    "type": "number",
                     "description": "Recipe's cooking time",
                     "example": 120
+                  },
+                  "calories": {
+                    "type": "number",
+                    "description": "Number of calories in recipe",
+                    "example": 1200
                   },
                   "thumb": {
                     "type": "string",
@@ -569,8 +582,8 @@
         ],
         "parameters": [
           {
-            "name": "id",
             "in": "path",
+            "name": "id",
             "required": true,
             "description": "Unique identifier of the recipe to be added to favorites",
             "schema": {
@@ -604,10 +617,8 @@
                           "title",
                           "category",
                           "owner",
-                          "area",
                           "instructions",
                           "description",
-                          "thumb",
                           "time",
                           "ingredients",
                           "createdAt",
@@ -647,8 +658,12 @@
                             "example": "https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg"
                           },
                           "time": {
-                            "type": "string",
+                            "type": "number",
                             "example": "60"
+                          },
+                          "calories": {
+                            "type": "number",
+                            "example": 1200
                           },
                           "ingredients": {
                             "type": "array",
@@ -1027,7 +1042,6 @@
           "_id",
           "name",
           "email",
-          "favouriteRecipes",
           "createdAt",
           "updatedAt"
         ],
@@ -1130,7 +1144,6 @@
         "required": [
           "_id",
           "name",
-          "desc",
           "img"
         ],
         "properties": {
@@ -1218,9 +1231,14 @@
             "example": "https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg"
           },
           "time": {
-            "type": "string",
+            "type": "number",
             "description": "Recipe's cooking time in minutes",
             "example": "60"
+          },
+          "calories": {
+            "type": "number",
+            "description": "Number of calories in recipe",
+            "example": 1200
           },
           "ingredients": {
             "type": "array",
@@ -1458,6 +1476,14 @@
                 "totalResults": {
                   "type": "integer",
                   "example": 60
+                },
+                "hasPreviousPage": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "hasNextPage": {
+                  "type": "boolean",
+                  "example": false
                 }
               }
             }

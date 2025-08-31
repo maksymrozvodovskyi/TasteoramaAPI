@@ -13,20 +13,20 @@ tags:
     description: This is operations about categories
   - name: Recipes
     description: This is operations about recipes
-  # - name: Ingredients
-  #   description: This is operations about ingredients
-  # - name: User
-  #   description: This is operations about user
+  - name: Ingredients
+    description: This is operations about ingredients
+  - name: User
+    description: This is operations about user
 servers:
   - url: https://tasteoramaapi.onrender.com
 paths:
-  /auth/register:
+  /api/auth/register:
     post:
       $ref: '../swagger/paths/auth/register.yaml'
-  /auth/login:
+  /api/auth/login:
     post:
       $ref: '../swagger/paths/auth/login/post.yaml'
-  /auth/logout:
+  /api/auth/logout:
     post:
       $ref: '../swagger/paths/auth/logout/post.yaml'
   /api/categories:

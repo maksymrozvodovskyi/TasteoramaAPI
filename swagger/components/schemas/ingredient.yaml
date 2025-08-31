@@ -4,7 +4,6 @@ description: Ingredient information used in recipes with details and visual repr
 required:
   - _id
   - name
-  - desc
   - img
 properties:
   _id:
