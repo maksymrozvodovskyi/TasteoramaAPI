@@ -6,8 +6,8 @@ operationId: addFavoriteRecipe
 security:
   - bearerAuth: []
 parameters:
-  - name: id
-    in: path
+  - in: path
+    name: id
     required: true
     description: Unique identifier of the recipe to be added to favorites
     schema:
@@ -36,10 +36,8 @@ responses:
                   - title
                   - category
                   - owner
-                  - area
                   - instructions
                   - description
-                  - thumb
                   - time
                   - ingredients
                   - createdAt
@@ -70,8 +68,11 @@ responses:
                     type: string
                     example: https://ftp.goit.study/img/so-yummy/preview/Battenberg%20Cake.jpg
                   time:
-                    type: string
+                    type: number
                     example: '60'
+                  calories:
+                    type: number
+                    example: 1200
                   ingredients:
                     type: array
                     items:

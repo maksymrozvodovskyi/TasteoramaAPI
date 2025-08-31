@@ -20,3 +20,9 @@ content:
         totalResults:
           type: integer
           example: 60
+        hasPreviousPage:
+          type: boolean
+          example: true
+        hasNextPage:
+          type: boolean
+          example: false
